@@ -6,14 +6,14 @@ public enum RoleUtilisateurEnum {
 	ROLE_DG("Directeur general"), //
 	ROLE_COMMERCANT("commerçant"); //
 	
-	private String labelle;
+	private String libelle;
 	
-	private RoleUtilisateurEnum(String labelle) {
-		this.labelle = labelle;
+	private RoleUtilisateurEnum(String libelle) {
+		this.libelle = libelle;
 	}
 
 	public String getLabelle() {
-		return labelle;
+		return libelle;
 	}
 
 }

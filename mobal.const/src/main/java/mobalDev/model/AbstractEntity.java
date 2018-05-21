@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+
 @MappedSuperclass // cette classe n'est pas une entité, mais ses champs seront enregistrés en base
 public abstract class AbstractEntity {
 	

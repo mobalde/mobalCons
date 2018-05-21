@@ -27,7 +27,7 @@ public class User extends AbstractEntity {
     @ManyToMany(fetch=FetchType.LAZY)
     private Collection<Role> roles;
     
-    protected User() {
+    public User() {
     	super();
     }
 
