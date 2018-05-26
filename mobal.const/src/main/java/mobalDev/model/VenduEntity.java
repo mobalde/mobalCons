@@ -38,7 +38,7 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	@JoinColumn(name="prix_id", referencedColumnName="id")
 	private PrixEntity prix;
 	
-	@OneToOne(mappedBy = "vendu", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "vendu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private BanqueEntity banque;
 	
 	protected VenduEntity() {

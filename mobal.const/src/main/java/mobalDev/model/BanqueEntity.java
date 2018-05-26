@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,19 +18,19 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	
 	@Column(name="date_depot", nullable=false)
 	private LocalDate dateDepot;
-	@Column(name="agence_de_depot", nullable=false)
+	@Column(name="agence_de_depot")
 	private String agenceDepot;
 	@Column(name="numero_ticket", nullable=false)
 	private String numeroTicket;
 	@Column(name="montant", nullable=false)
-	private Long Montant;
-	@Column(name="is_depot", nullable=false)
+	private Double Montant;
+	@Column(name="is_depot")
 	private boolean isDepot;
-	@Column(name="is_retrait", nullable=false)
+	@Column(name="is_retrait")
 	private boolean isRetrait;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id")
+	@JoinColumn(name="vendu_id", referencedColumnName="id")
 	private VenduEntity vendu;
 	
 	protected BanqueEntity() {
@@ -58,10 +55,10 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	public void setNumeroTicket(String numeroTicket) {
 		this.numeroTicket = numeroTicket;
 	}
-	public Long getMontant() {
+	public Double getMontant() {
 		return Montant;
 	}
-	public void setMontant(Long montant) {
+	public void setMontant(Double montant) {
 		Montant = montant;
 	}
 	public boolean isDepot() {

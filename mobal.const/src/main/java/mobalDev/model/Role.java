@@ -2,7 +2,6 @@ package mobalDev.model;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +17,7 @@ public class Role extends AbstractEntity{
 	private RoleUtilisateurEnum role;
 	
 	@ManyToMany(mappedBy="roles", fetch=FetchType.LAZY)
-	private Collection<User> users;
+	private Collection<User> user;
 	
 	protected Role() {
 		super();
@@ -33,10 +32,10 @@ public class Role extends AbstractEntity{
 	}
 
 	public Collection<User> getUser() {
-		return users;
+		return user;
 	}
 
 	public void setUser(Collection<User> user) {
-		this.users = user;
+		this.user = user;
 	}
 }

@@ -6,11 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="utilisateur")
+@Table(name="users")
 public class User extends AbstractEntity {
 
 	@NotNull
@@ -25,11 +27,9 @@ public class User extends AbstractEntity {
     private boolean enabled;
     
     @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
-    
-    public User() {
-    	super();
-    }
 
 	public String getNom() {
 		return Nom;
