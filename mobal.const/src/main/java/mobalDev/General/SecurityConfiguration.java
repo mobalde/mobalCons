@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -23,9 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Autowired
-	private DataSource dataSource;
 	
 	@Value("${spring.queries.users-query}") // Definit dans application.properties
 	private String usersQuery;
@@ -34,14 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	private String rolesQuery;
 	
 	@Autowired
-	public void globalConfig(AuthenticationManagerBuilder auth)
+	public void globalConfig(AuthenticationManagerBuilder auth, DataSource dataSource)
 			throws Exception {
 		auth.
 			jdbcAuthentication()
-				.usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource)
-				.passwordEncoder(bCryptPasswordEncoder);
+				.passwordEncoder(bCryptPasswordEncoder)
+				.usersByUsernameQuery(usersQuery)
+				.authoritiesByUsernameQuery(rolesQuery);
 	}
 
 	@Override
@@ -60,7 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	}
 	
 	@Bean
-    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }

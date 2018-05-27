@@ -11,6 +11,7 @@ public class UtilisateurDto {
 	private String Nom;
 	private String prenom;
 	private List<RoleUtilisateurEnum> role;
+	private String responses;
 	public String getNom() {
 		return Nom;
 	}
@@ -40,6 +41,12 @@ public class UtilisateurDto {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getResponses() {
+		return responses;
+	}
+	public void setResponses(String msgAuth) {
+		this.responses = msgAuth;
 	}
 	
 }

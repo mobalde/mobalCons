@@ -5,7 +5,7 @@ import mobalDev.model.RoleUtilisateurEnum;
 public class UtilisateurDao {
 
 	private String email;
-	private String passwrd;
+	private String password;
 	private String nom;
 	private String prenom;
 	private RoleUtilisateurEnum role;
@@ -15,11 +15,11 @@ public class UtilisateurDao {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPasswrd() {
-		return passwrd;
+	public String getPassword() {
+		return password;
 	}
-	public void setPasswrd(String passwrd) {
-		this.passwrd = passwrd;
+	public void setPassword(String passwrd) {
+		this.password = passwrd;
 	}
 	public String getNom() {
 		return nom;

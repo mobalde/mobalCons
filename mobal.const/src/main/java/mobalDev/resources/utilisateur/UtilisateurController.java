@@ -9,10 +9,10 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
-import mobalDev.General.LoggerInfo;
 import mobalDev.logic.utilisateur.GestionUtilisateur;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
@@ -29,13 +29,16 @@ import mobalDev.logic.utilisateur.dto.UtilisateurDto;
 	consumes = MediaType.APPLICATION_JSON_VALUE, 
 	produces = MediaType.APPLICATION_JSON_VALUE
 )
-public class UtilisateurController extends LoggerInfo{
+public class UtilisateurController{
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
 	@Inject
 	GestionUtilisateur gestionUtilisateur;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public UtilisateurDto connexion(@RequestBody UtilisateurDao utilisateurDao){
@@ -44,13 +47,16 @@ public class UtilisateurController extends LoggerInfo{
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
 	public UtilisateurDto register(@RequestBody UtilisateurDao utilisateurDao){
+		utilisateurDao.setPassword(bCryptPasswordEncoder.encode(utilisateurDao.getPassword()));
 		return gestionUtilisateur.registration(utilisateurDao);
 	}
 	
 	public Authentication authenticate(UtilisateurDao utilisateurDao) throws AuthenticationServiceException{
 		
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPasswrd());
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPassword());
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		return SecurityContextHolder.getContext().getAuthentication();

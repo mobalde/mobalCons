@@ -6,4 +6,5 @@ import mobalDev.model.User;
 
 public interface UtilisateurRepository extends JpaRepository<User, Long>{
 
+	User findByEmail(String email);
 }

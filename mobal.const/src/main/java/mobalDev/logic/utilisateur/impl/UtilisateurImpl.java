@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,9 +33,6 @@ import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
 @Component
 public class UtilisateurImpl implements GestionUtilisateur{
 	
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
 	@Inject
 	private UtilisateurRepository utilisateurRepo;
 	
@@ -44,22 +42,28 @@ public class UtilisateurImpl implements GestionUtilisateur{
 	@Inject
 	UtilisateurMapper utilisateurMapper;
 	
-	@Override
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	
 	/**
 	 * 
 	 * @Param utilisateurDao et l'objet auth
 	 * cette methode recupere les info de l'utilisateur lors de la connexion
 	 * 
 	 */
+	@Override
 	public UtilisateurDto authentification(UtilisateurDao utilisateurDao, Authentication auth) {
 		
 		UtilisateurDto utilisateurDto = new UtilisateurDto();
 		utilisateurDto.setEmail(utilisateurDao.getEmail());
-		utilisateurDto.setPassword(auth == null ? utilisateurDao.getPasswrd() : null);
+		utilisateurDto.setPassword(auth == null ? utilisateurDao.getPassword() : null);
 		if(auth != null){
+			User user = this.utilisateurRepo.findByEmail(utilisateurDao.getEmail());
+			utilisateurDto.setNom(user.getNom());
+			utilisateurDto.setPrenom(user.getPrenom());
 			List<RoleUtilisateurEnum> roles = new ArrayList<>();
 			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-			utilisateurDto.setNom(auth.getName());
 			authorities.stream()
 					.map(x -> x.getAuthority())
 					.forEach(y -> {
@@ -73,30 +77,31 @@ public class UtilisateurImpl implements GestionUtilisateur{
 						case "ROLE_COMMERCANT":
 							roles.add(RoleUtilisateurEnum.ROLE_COMMERCANT);
 							break;
+						default:
+						break;
 						}
 			});
 			utilisateurDto.setRole(roles);
+			utilisateurDto.setResponses("Authenification reussie");
 		}
-		
 		return utilisateurDto;
 	}
 
-	@Override
+	
 	/**
 	 * 
 	 * @Param utilisateurDao
 	 * 
 	 */
-	public UtilisateurDto registration(UtilisateurDao utilisateurDao) {
-		
+	@Override
+	public UtilisateurDto registration(UtilisateurDao utilisateurDao){
+
 		List<Role> roles = new ArrayList<>();
 		User user = new User();
-		
 		// On recupere le role
 		Role role = this.roleRepository.findByRole(utilisateurDao.getRole());
-		roles.add(role);
-				
-		user.setPassword(bCryptPasswordEncoder.encode(utilisateurDao.getPasswrd()));
+		roles.add(role);	
+		user.setPassword(utilisateurDao.getPassword());
 		user.setEmail(utilisateurDao.getEmail());
 		user.setEnabled(true);
 		user.setModificationcounter(0);
@@ -104,9 +109,14 @@ public class UtilisateurImpl implements GestionUtilisateur{
 		user.setPrenom(utilisateurDao.getPrenom());
 		user.setCreate_at(LocalDateTime.now());
 		user.setRole(roles);
-		this.utilisateurRepo.saveAndFlush(user);
-		
-		return this.utilisateurMapper.convertEntityToDto(user, new UtilisateurDto());
+		try{
+			this.utilisateurRepo.saveAndFlush(user);
+			return this.utilisateurMapper.convertEntityToDto(user, new UtilisateurDto());
+		}catch(Exception e){
+			UtilisateurDto utilisateurDto = modelMapper.map(utilisateurDao, UtilisateurDto.class);
+			utilisateurDto.setResponses("L'utilisateur<email> "+utilisateurDao.getEmail()+" Existe dejà");
+			return utilisateurDto;
+		}
 	}
 
 }

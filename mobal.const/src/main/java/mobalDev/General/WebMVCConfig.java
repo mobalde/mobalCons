@@ -1,6 +1,7 @@
 package mobalDev.General;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,5 +22,9 @@ public class WebMVCConfig extends WebMvcAutoConfiguration{
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
-
+	
+	@Bean
+	public ModelMapper modelMapper() {
+	    return new ModelMapper();
+	}
 }
