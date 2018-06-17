@@ -1,11 +1,11 @@
 package mobalDev.General;
 
 import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,6 @@ public class CORSFilter extends GenericFilterBean{
     @Override
     public void doFilter(ServletRequest request, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-
     }
 
     @SuppressWarnings("unused")
@@ -30,8 +29,7 @@ public class CORSFilter extends GenericFilterBean{
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
+        config.addAllowedOrigin("http://localhost:4200");
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");
         config.addAllowedMethod("GET");
@@ -39,7 +37,7 @@ public class CORSFilter extends GenericFilterBean{
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
         config.addAllowedMethod("PATCH");
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/mobalc/**", config);
         return getCorsFilter(source);
     }
 }

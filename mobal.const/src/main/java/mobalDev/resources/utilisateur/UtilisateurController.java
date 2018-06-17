@@ -23,7 +23,7 @@ import mobalDev.logic.utilisateur.dto.UtilisateurDto;
  * cette class implemente les web services qui gèrent les utilisateurs
  *
  */
-
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping(path="/mobalc",
 	consumes = MediaType.APPLICATION_JSON_VALUE, 
