@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class UtilisateurImpl implements GestionUtilisateur{
 	 * 
 	 */
 	@Override
-	public UtilisateurDto authentification(UtilisateurDao utilisateurDao, Authentication auth) {
+	public UtilisateurDto authentification(UtilisateurDao utilisateurDao, Authentication auth, HttpSession session) {
 		
 		UtilisateurDto utilisateurDto = new UtilisateurDto();
 		utilisateurDto.setEmail(utilisateurDao.getEmail());
@@ -83,6 +84,7 @@ public class UtilisateurImpl implements GestionUtilisateur{
 			});
 			utilisateurDto.setRole(roles);
 			utilisateurDto.setResponses("Authenification reussie");
+			session.setAttribute("currentUser", utilisateurDto);
 		}
 		return utilisateurDto;
 	}

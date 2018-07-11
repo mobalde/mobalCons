@@ -1,6 +1,7 @@
 package mobalDev.resources.utilisateur;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -41,9 +42,9 @@ public class UtilisateurController{
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public UtilisateurDto connexion(@RequestBody UtilisateurDao utilisateurDao){
+	public UtilisateurDto connexion(HttpSession session, @RequestBody UtilisateurDao utilisateurDao){
 		Authentication auth = this.authenticate(utilisateurDao);
-		return gestionUtilisateur.authentification(utilisateurDao,auth);
+		return gestionUtilisateur.authentification(utilisateurDao,auth, session);
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -60,5 +61,14 @@ public class UtilisateurController{
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		return SecurityContextHolder.getContext().getAuthentication();
+	}
+	
+	@RequestMapping(path = "/currentUser/{email:.+}", method = RequestMethod.GET)
+	public boolean isConnecter(HttpSession session, @PathVariable String email){
+		if(session.getAttribute("currentUser") != null){
+			UtilisateurDto utilisateurDto = (UtilisateurDto) session.getAttribute("currentUser");
+			return (utilisateurDto != null && utilisateurDto.getEmail().equals(email));
+		}
+		return false;
 	}
 }
