@@ -1,6 +1,8 @@
 package mobalDev.resources.utilisateur;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -70,5 +73,15 @@ public class UtilisateurController{
 			return (utilisateurDto != null && utilisateurDto.getEmail().equals(email));
 		}
 		return false;
+	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public boolean logoutPage (HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null && session.getAttribute("currentUser") != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	        return true;
+	    }
+	    return false;
 	}
 }
