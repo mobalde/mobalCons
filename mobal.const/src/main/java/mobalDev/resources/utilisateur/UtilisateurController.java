@@ -1,5 +1,8 @@
 package mobalDev.resources.utilisateur;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,12 +61,17 @@ public class UtilisateurController{
 		return gestionUtilisateur.registration(utilisateurDao);
 	}
 	
-	public Authentication authenticate(UtilisateurDao utilisateurDao) throws AuthenticationServiceException{
+	public Authentication authenticate(UtilisateurDao utilisateurDao) {
 		
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPassword());
-		Authentication authentication = authenticationManager.authenticate(authenticationToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		return SecurityContextHolder.getContext().getAuthentication();
+		try{
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPassword());
+			Authentication authentication = authenticationManager.authenticate(authenticationToken);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			return SecurityContextHolder.getContext().getAuthentication();
+		} catch(Exception e){
+			throw new AuthenticationServiceException("Unable to check user credantials.", e);
+		}
+		
 	}
 	
 	@RequestMapping(path = "/currentUser/{email:.+}", method = RequestMethod.GET)
