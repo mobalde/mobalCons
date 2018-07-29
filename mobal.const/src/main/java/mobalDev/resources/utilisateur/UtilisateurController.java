@@ -1,7 +1,6 @@
 package mobalDev.resources.utilisateur;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+import java.time.LocalTime;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import mobalDev.logic.utilisateur.GestionUtilisateur;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
+import mobalDev.model.User;
+import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
 
 /**
  * 
@@ -38,6 +38,9 @@ import mobalDev.logic.utilisateur.dto.UtilisateurDto;
 )
 public class UtilisateurController{
 	
+	private static final String CURRENT_USER = "currentUser";
+	private static final String TEMPS_CONNEXION = "timeout";
+	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
@@ -47,10 +50,14 @@ public class UtilisateurController{
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	@Inject
+	private UtilisateurRepository utilisateurRepo;
+	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public UtilisateurDto connexion(HttpSession session, @RequestBody UtilisateurDao utilisateurDao){
+		User user = this.utilisateurRepo.findByEmail(utilisateurDao.getEmail());
 		Authentication auth = this.authenticate(utilisateurDao);
-		return gestionUtilisateur.authentification(utilisateurDao,auth, session);
+		return gestionUtilisateur.authentification(user,auth, session);
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -62,23 +69,18 @@ public class UtilisateurController{
 	}
 	
 	public Authentication authenticate(UtilisateurDao utilisateurDao) {
-		
-		try{
-			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPassword());
-			Authentication authentication = authenticationManager.authenticate(authenticationToken);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return SecurityContextHolder.getContext().getAuthentication();
-		} catch(Exception e){
-			throw new AuthenticationServiceException("Unable to check user credantials.", e);
-		}
-		
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(utilisateurDao.getEmail(),utilisateurDao.getPassword());
+		Authentication authentication = authenticationManager.authenticate(authenticationToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		return SecurityContextHolder.getContext().getAuthentication();
 	}
 	
 	@RequestMapping(path = "/currentUser/{email:.+}", method = RequestMethod.GET)
 	public boolean isConnecter(HttpSession session, @PathVariable String email){
-		if(session.getAttribute("currentUser") != null){
-			UtilisateurDto utilisateurDto = (UtilisateurDto) session.getAttribute("currentUser");
-			return (utilisateurDto != null && utilisateurDto.getEmail().equals(email));
+		System.out.println("____ session created: "+session.getMaxInactiveInterval());
+		if(session.getAttribute(CURRENT_USER) != null && session.getMaxInactiveInterval() == 1800){
+			String mail = (String) session.getAttribute(CURRENT_USER);
+			return (mail.equals(email));
 		}
 		return false;
 	}
@@ -86,7 +88,7 @@ public class UtilisateurController{
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public boolean logoutPage (HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null && session.getAttribute("currentUser") != null){    
+	    if (auth != null && session.getAttribute(CURRENT_USER) != null){    
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	        return true;
 	    }

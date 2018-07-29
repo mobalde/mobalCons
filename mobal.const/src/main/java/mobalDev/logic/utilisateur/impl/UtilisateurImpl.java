@@ -1,6 +1,7 @@
 package mobalDev.logic.utilisateur.impl;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,6 +35,8 @@ import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
 @Component
 public class UtilisateurImpl implements GestionUtilisateur{
 	
+	private LocalTime now = LocalTime.now();
+	
 	@Inject
 	private UtilisateurRepository utilisateurRepo;
 	
@@ -54,21 +57,19 @@ public class UtilisateurImpl implements GestionUtilisateur{
 	 * 
 	 */
 	@Override
-	public UtilisateurDto authentification(UtilisateurDao utilisateurDao, Authentication auth, HttpSession session) {
+	public UtilisateurDto authentification(User user, Authentication auth, HttpSession session) {
 		
 		UtilisateurDto utilisateurDto = new UtilisateurDto();
-		utilisateurDto.setEmail(utilisateurDao.getEmail());
-		utilisateurDto.setPassword(auth == null ? utilisateurDao.getPassword() : null);
-		if(auth != null){
-			User user = this.utilisateurRepo.findByEmail(utilisateurDao.getEmail());
-			utilisateurDto.setNom(user.getNom());
-			utilisateurDto.setPrenom(user.getPrenom());
-			List<RoleUtilisateurEnum> roles = new ArrayList<>();
-			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-			authorities.stream()
-					.map(x -> x.getAuthority())
-					.forEach(y -> {
-						switch(y){
+		utilisateurDto.setEmail(user.getEmail());
+		utilisateurDto.setPassword(null);
+		utilisateurDto.setNom(user.getNom());
+		utilisateurDto.setPrenom(user.getPrenom());
+		List<RoleUtilisateurEnum> roles = new ArrayList<>();
+		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		authorities.stream()
+				.map(x -> x.getAuthority())
+				.forEach(y -> {
+					switch(y){
 						case "ROLE_ADMIN":
 							roles.add(RoleUtilisateurEnum.ROLE_ADMIN);
 							break;
@@ -80,12 +81,12 @@ public class UtilisateurImpl implements GestionUtilisateur{
 							break;
 						default:
 						break;
-						}
-			});
-			utilisateurDto.setRole(roles);
-			utilisateurDto.setResponses("Authenification reussie");
-			session.setAttribute("currentUser", utilisateurDto);
-		}
+					}
+				});
+		utilisateurDto.setRole(roles);
+		utilisateurDto.setResponses("Authenification reussie");
+		session.setAttribute("currentUser", utilisateurDto.getEmail());
+		session.setMaxInactiveInterval(30*60); // 20mn (1min->60s)
 		return utilisateurDto;
 	}
 

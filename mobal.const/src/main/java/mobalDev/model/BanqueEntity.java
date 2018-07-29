@@ -22,56 +22,82 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	private String agenceDepot;
 	@Column(name="numero_ticket", nullable=false)
 	private String numeroTicket;
-	@Column(name="montant", nullable=false)
-	private Double Montant;
+	@Column(name="argent_depose", nullable=false)
+	private Double argentDepose;
+	@Column(name="solde_anterieur", nullable=false)
+	private Double soldeAnterieur;
+	@Column(name="total", nullable=false)
+	private Double total;
 	@Column(name="is_depot")
 	private boolean isDepot;
 	@Column(name="is_retrait")
 	private boolean isRetrait;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="vendu_id", referencedColumnName="id")
-	private VenduEntity vendu;
-	
 	protected BanqueEntity() {
 		super();
 	}
-	
+
 	public LocalDate getDateDepot() {
 		return dateDepot;
 	}
+
 	public void setDateDepot(LocalDate dateDepot) {
 		this.dateDepot = dateDepot;
 	}
+
 	public String getAgenceDepot() {
 		return agenceDepot;
 	}
+
 	public void setAgenceDepot(String agenceDepot) {
 		this.agenceDepot = agenceDepot;
 	}
+
 	public String getNumeroTicket() {
 		return numeroTicket;
 	}
+
 	public void setNumeroTicket(String numeroTicket) {
 		this.numeroTicket = numeroTicket;
 	}
-	public Double getMontant() {
-		return Montant;
+
+	public Double getArgentDepose() {
+		return argentDepose;
 	}
-	public void setMontant(Double montant) {
-		Montant = montant;
+
+	public void setArgentDepose(Double argentDepose) {
+		this.argentDepose = argentDepose;
 	}
+
+	public Double getSoldeAnterieur() {
+		return soldeAnterieur;
+	}
+
+	public void setSoldeAnterieur(Double soldeAnterieur) {
+		this.soldeAnterieur = soldeAnterieur;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	public boolean isDepot() {
 		return isDepot;
 	}
+
 	public void setDepot(boolean isDepot) {
 		this.isDepot = isDepot;
 	}
+
 	public boolean isRetrait() {
 		return isRetrait;
 	}
+
 	public void setRetrait(boolean isRetrait) {
 		this.isRetrait = isRetrait;
 	}
-	
 }

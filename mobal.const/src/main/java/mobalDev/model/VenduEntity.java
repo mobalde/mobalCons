@@ -7,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -27,6 +24,8 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	private LocalDate dateFin;
 	@Column(nullable=false)
 	private int quantite;
+	@Column(name="prix_unitaire")
+	private Double prixUnitaire;
 	private double total;
 	
 	// -- optional = true: l'attribut peut etre null
@@ -34,39 +33,56 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	@JoinColumn(name="produit_id", referencedColumnName="id")
 	private ProduitEntity produit;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
-	@JoinColumn(name="prix_id", referencedColumnName="id")
-	private PrixEntity prix;
-	
-	@OneToOne(mappedBy = "vendu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private BanqueEntity banque;
-	
 	protected VenduEntity() {
 		super();
 	}
+
 	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
+
 	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
+
 	public LocalDate getDateFin() {
 		return dateFin;
 	}
+
 	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
 	}
+
 	public int getQuantite() {
 		return quantite;
 	}
+
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+
+	public Double getPrixUnitaire() {
+		return prixUnitaire;
+	}
+
+	public void setPrixUnitaire(Double prixUnitaire) {
+		this.prixUnitaire = prixUnitaire;
+	}
+
 	public double getTotal() {
 		return total;
 	}
+
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public ProduitEntity getProduit() {
+		return produit;
+	}
+
+	public void setProduit(ProduitEntity produit) {
+		this.produit = produit;
 	}
 	
 }
