@@ -25,6 +25,8 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	private int totalSacVendu;
 	@Column(name="total_sac_marchandise", nullable=false)
 	private int totalSacMarchandise;
+	@Column(name="total_sac_restant")
+	private int totalSacRestant;
 	
 	protected MarchandiseEntity() {
 		super();
@@ -77,5 +79,12 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	public void setTotalSacMarchandise(int totalSacMarchandise) {
 		this.totalSacMarchandise = totalSacMarchandise;
 	}
-	
+
+	public int getTotalSacRestant() {
+		return totalSacRestant;
+	}
+
+	public void setTotalSacRestant(int totalSacRestant) {
+		this.totalSacRestant = totalSacRestant;
+	}
 }

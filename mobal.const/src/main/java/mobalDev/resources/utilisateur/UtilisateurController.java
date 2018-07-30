@@ -1,7 +1,5 @@
 package mobalDev.resources.utilisateur;
 
-import java.time.LocalTime;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +37,6 @@ import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
 public class UtilisateurController{
 	
 	private static final String CURRENT_USER = "currentUser";
-	private static final String TEMPS_CONNEXION = "timeout";
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
