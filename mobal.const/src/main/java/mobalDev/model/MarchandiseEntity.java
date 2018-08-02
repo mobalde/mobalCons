@@ -28,7 +28,7 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	@Column(name="total_sac_restant")
 	private int totalSacRestant;
 	
-	protected MarchandiseEntity() {
+	public MarchandiseEntity() {
 		super();
 	}
 
