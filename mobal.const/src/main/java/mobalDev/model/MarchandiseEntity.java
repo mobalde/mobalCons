@@ -3,8 +3,12 @@ package mobalDev.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +19,7 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	
 	@Column(name="date_debut", nullable=false)
 	private LocalDate dateDebut;
-	@Column(name="date_fin")
+	@Column(name="date_fin", nullable=false)
 	private LocalDate dateFin;
 	@Column(name="nb_sac_vendu" , nullable=false)
 	private int nbSacVendu;
@@ -25,8 +29,12 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	private int totalSacVendu;
 	@Column(name="total_sac_marchandise", nullable=false)
 	private int totalSacMarchandise;
-	@Column(name="total_sac_restant")
+	@Column(name="total_marchandise_restant", nullable=false)
 	private int totalSacRestant;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
+	@JoinColumn(name="produit_id", referencedColumnName="id")
+	private ProduitEntity produit;
 	
 	public MarchandiseEntity() {
 		super();
@@ -86,5 +94,13 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 
 	public void setTotalSacRestant(int totalSacRestant) {
 		this.totalSacRestant = totalSacRestant;
+	}
+
+	public ProduitEntity getProduit() {
+		return produit;
+	}
+
+	public void setProduit(ProduitEntity produit) {
+		this.produit = produit;
 	}
 }

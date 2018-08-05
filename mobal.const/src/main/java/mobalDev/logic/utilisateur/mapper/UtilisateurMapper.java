@@ -15,14 +15,14 @@ public class UtilisateurMapper implements SourceDestinationMapper<User, Utilisat
 	private ModelMapper modelMaper;
 
 	@Override
-	public UtilisateurDto convertEntityToDto(User entity, UtilisateurDto dto) {
-		dto = modelMaper.map(entity, UtilisateurDto.class);
+	public UtilisateurDto convertEntityToDto(User entity) {
+		UtilisateurDto dto = modelMaper.map(entity, UtilisateurDto.class);
 		dto.setEmail(null);
 		return dto;
 	}
 
 	@Override
-	public User convertDtoToEntity(UtilisateurDto dto, User entity) {
+	public User convertDtoToEntity(UtilisateurDto dto) {
 		return null;
 	}
 

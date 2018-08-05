@@ -18,8 +18,8 @@ public abstract class AbstractEntity {
 	@Column(columnDefinition = "serial")
 	private Long id;
 	
-	private LocalDateTime create_at;
-	private LocalDateTime update_at;
+	private LocalDateTime create_at = LocalDateTime.now();
+	private LocalDateTime update_at = LocalDateTime.now();
 	
 	private int modificationcounter;
 	

@@ -114,7 +114,7 @@ public class UtilisateurImpl implements GestionUtilisateur{
 		user.setRole(roles);
 		try{
 			this.utilisateurRepo.saveAndFlush(user);
-			return this.utilisateurMapper.convertEntityToDto(user, new UtilisateurDto());
+			return this.utilisateurMapper.convertEntityToDto(user);
 		}catch(Exception e){
 			UtilisateurDto utilisateurDto = modelMapper.map(utilisateurDao, UtilisateurDto.class);
 			utilisateurDto.setResponses("L'utilisateur<email> "+utilisateurDao.getEmail()+" Existe dejà");

@@ -4,6 +4,7 @@ create table produit(
 	update_at timestamp without time zone,
 	modificationcounter integer not null,
 	libelle varchar(500) not null,
+	quantite_commande integer not null,
 	PRIMARY KEY(id)
 );
 
@@ -47,9 +48,12 @@ create table marchandise(
 	date_debut date not null,
 	date_fin date not null,
 	nb_sac_vendu int not null,
-	nb_sac_anterieur int not null,
+	nb_sac_anterieur int not null default 0,
 	total_sac_vendu int not null,
 	total_sac_marchandise int not null,
 	total_marchandise_restant int not null,
+	produit_id BIGSERIAL,
 	PRIMARY KEY(id)
 );
+
+alter table marchandise add CONSTRAINT fk_produit_marchandise FOREIGN KEY(produit_id) REFERENCES produit(id);

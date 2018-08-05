@@ -20,10 +20,16 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	@Column(nullable = false)
 	private String libelle;
 	
+	@Column(name = "quantite_commande", nullable = false)
+	private int quantiteCommande;
+	
 	@OneToMany(mappedBy = "produit")
 	private Set<VenduEntity> vendu;
 	
-	protected ProduitEntity() {
+	@OneToMany(mappedBy = "produit")
+	private Set<MarchandiseEntity> marchandise;
+	
+	public ProduitEntity() {
 		super();
 	}
 
@@ -34,5 +40,28 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
+	public Set<VenduEntity> getVendu() {
+		return vendu;
+	}
+
+	public void setVendu(Set<VenduEntity> vendu) {
+		this.vendu = vendu;
+	}
+
+	public Set<MarchandiseEntity> getMarchandise() {
+		return marchandise;
+	}
+
+	public void setMarchandise(Set<MarchandiseEntity> marchandise) {
+		this.marchandise = marchandise;
+	}
+
+	public int getQuantiteCommande() {
+		return quantiteCommande;
+	}
+
+	public void setQuantiteCommande(int quantiteCommande) {
+		this.quantiteCommande = quantiteCommande;
+	}
 }

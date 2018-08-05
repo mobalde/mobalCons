@@ -10,13 +10,13 @@ import mobalDev.model.BanqueEntity;
 public class BanqueMapper implements SourceDestinationMapper<BanqueEntity,BanqueDto>{
 
 	@Override
-	public BanqueDto convertEntityToDto(BanqueEntity entity, BanqueDto dto) {
+	public BanqueDto convertEntityToDto(BanqueEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BanqueEntity convertDtoToEntity(BanqueDto dto, BanqueEntity entity) {
+	public BanqueEntity convertDtoToEntity(BanqueDto dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

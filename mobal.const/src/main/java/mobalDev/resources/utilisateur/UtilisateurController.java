@@ -74,7 +74,6 @@ public class UtilisateurController{
 	
 	@RequestMapping(path = "/currentUser/{email:.+}", method = RequestMethod.GET)
 	public boolean isConnecter(HttpSession session, @PathVariable String email){
-		System.out.println("____ session created: "+session.getMaxInactiveInterval());
 		if(session.getAttribute(CURRENT_USER) != null && session.getMaxInactiveInterval() == 1800){
 			String mail = (String) session.getAttribute(CURRENT_USER);
 			return (mail.equals(email));

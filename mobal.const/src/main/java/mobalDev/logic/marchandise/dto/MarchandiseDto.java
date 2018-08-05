@@ -7,10 +7,11 @@ public class MarchandiseDto{
 	private LocalDate dateDebut;
 	private LocalDate dateFin;
 	private int nbSacVendu;
-	private int nbSacAnterieur;
+	private int nbSacAnterieur = 0;
 	private int totalSacVendu;
 	private int totalSacMarchandise;
 	private int totalSacRestant;
+	private Long idProduit;
 	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
@@ -53,5 +54,10 @@ public class MarchandiseDto{
 	public void setTotalSacRestant(int totalSacRestant) {
 		this.totalSacRestant = totalSacRestant;
 	}
-	
+	public Long getIdProduit() {
+		return idProduit;
+	}
+	public void setIdProduit(Long idProduit) {
+		this.idProduit = idProduit;
+	}
 }
