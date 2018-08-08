@@ -28,7 +28,7 @@ public class MarchandiseController {
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/ajout/marchandise", method = RequestMethod.POST)
-	private boolean marchandiseAdd(HttpSession session, @RequestBody MarchandiseDto dto){
+	private MarchandiseDto marchandiseAdd(HttpSession session, @RequestBody MarchandiseDto dto){
 		return this.gestionMarvhandise.registration(dto);
 	}
 	

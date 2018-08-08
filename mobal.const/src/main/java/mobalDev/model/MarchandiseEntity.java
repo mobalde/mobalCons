@@ -32,7 +32,7 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	@Column(name="total_marchandise_restant", nullable=false)
 	private int totalSacRestant;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
 	@JoinColumn(name="produit_id", referencedColumnName="id")
 	private ProduitEntity produit;
 	

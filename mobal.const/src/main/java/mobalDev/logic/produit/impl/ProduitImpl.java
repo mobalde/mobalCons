@@ -31,8 +31,8 @@ public class ProduitImpl implements GestionProduit{
 	public <Object> void registration(Object dto) {
 		
 		ProduitDto produitDto = (ProduitDto) dto;
-		ProduitEntity produitEntity = new ProduitEntity();
-		produitEntity = this.produitMapper.convertDtoToEntity(produitDto);
+		ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(produitDto);
+		produitEntity.setId(null);
 		this.produitRepo.saveAndFlush(produitEntity);
 	}
 
