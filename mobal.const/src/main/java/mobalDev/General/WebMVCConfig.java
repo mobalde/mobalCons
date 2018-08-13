@@ -14,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMVCConfig implements WebMvcConfigurer{
 	
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/mobalc/**")
+		registry
+				.addMapping("/mobalc/**")
 				.allowedOrigins("http://localhost:4200");
 	}
 	

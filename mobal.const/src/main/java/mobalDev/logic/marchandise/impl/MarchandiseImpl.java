@@ -34,10 +34,10 @@ public class MarchandiseImpl implements GestionMarchandise{
 	@Override
 	public MarchandiseDto registration(MarchandiseDto dto) {
 		
+		dto.setNbSacAnterieur(dto.getNbSacAnterieur() == 0 ? dto.getNbSacVendu() : dto.getTotalSacVendu());
 		MarchandiseEntity marchandiseEntity = this.marchandiseMapper.convertDtoToEntity(dto);
 		marchandiseEntity.setId(null);
 		Optional<ProduitEntity> produitEntity = this.produitRepo.findById(dto.getIdProduit());
-		dto.setNbSacAnterieur(dto.getNbSacAnterieur() == 0 ? dto.getNbSacVendu() : dto.getTotalSacVendu());
 		marchandiseEntity.setProduit(produitEntity.get());
 		this.marchandiseRepo.saveAndFlush(marchandiseEntity);
 		dto.setNbSacVendu(0);

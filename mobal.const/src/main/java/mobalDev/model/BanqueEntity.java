@@ -3,6 +3,7 @@ package mobalDev.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +33,10 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	private boolean isDepot;
 	@Column(name="is_retrait")
 	private boolean isRetrait;
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
+	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
+	private VenduInBanqueEntity venduInBanque;
 	
 	protected BanqueEntity() {
 		super();

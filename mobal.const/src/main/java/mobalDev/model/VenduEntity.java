@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,9 +28,13 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	private double total;
 	
 	// -- optional = true: l'attribut peut etre null
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="produit_id", referencedColumnName="id")
 	private ProduitEntity produit;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
+	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
+	private VenduInBanqueEntity venduInBanque;
 	
 	protected VenduEntity() {
 		super();
@@ -84,5 +87,12 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	public void setProduit(ProduitEntity produit) {
 		this.produit = produit;
 	}
-	
+
+	public VenduInBanqueEntity getVenduInBanque() {
+		return venduInBanque;
+	}
+
+	public void setVenduInBanque(VenduInBanqueEntity venduInBanque) {
+		this.venduInBanque = venduInBanque;
+	}
 }

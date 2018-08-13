@@ -8,6 +8,15 @@ create table produit(
 	PRIMARY KEY(id)
 );
 
+create table vendu_in_banque(
+	id BIGSERIAL NOT NULL,
+	create_at timestamp without time zone,
+	update_at timestamp without time zone,
+	modificationcounter integer not null,
+	is_depot_banque boolean default false,
+	PRIMARY KEY(id)
+);
+
 create table vendu(
 	id BIGSERIAL NOT NULL,
 	create_at timestamp without time zone,
@@ -19,10 +28,12 @@ create table vendu(
 	prix_unitaire double precision,
 	total double precision,
 	produit_id BIGSERIAL,
+	vendu_in_banque_id BIGSERIAL,
 	PRIMARY KEY(id)
 );
 
 alter table vendu add CONSTRAINT fk_produit_vendu FOREIGN KEY(produit_id) REFERENCES produit(id);
+alter table vendu add CONSTRAINT fk_vendu_in_banque_vendu FOREIGN KEY(vendu_in_banque_id) REFERENCES vendu_in_banque(id);
 
 create table banque(
 	id BIGSERIAL NOT NULL,
@@ -37,8 +48,11 @@ create table banque(
 	total double precision,
 	is_depot boolean,
 	is_retrait boolean,
+	vendu_in_banque_id BIGSERIAL,
 	PRIMARY KEY(id)
 );
+
+alter table banque add CONSTRAINT fk_vendu_in_banque_banque FOREIGN KEY(vendu_in_banque_id) REFERENCES vendu_in_banque(id);
 
 create table marchandise(
 	id BIGSERIAL NOT NULL,

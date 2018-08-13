@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 public class BanqueDto {
 
+	private Long id;
 	private LocalDate dateDepot;
 	private String agenceDepot;
 	private String numeroTicket;
-	private Long Montant;
+	private Double argentDepose;
+	private Double total;
 	private boolean isDepot;
 	private boolean isRetrait;
 	
@@ -31,12 +33,6 @@ public class BanqueDto {
 	public void setNumeroTicket(String numeroTicket) {
 		this.numeroTicket = numeroTicket;
 	}
-	public Long getMontant() {
-		return Montant;
-	}
-	public void setMontant(Long montant) {
-		Montant = montant;
-	}
 	public boolean isDepot() {
 		return isDepot;
 	}
@@ -49,5 +45,22 @@ public class BanqueDto {
 	public void setRetrait(boolean isRetrait) {
 		this.isRetrait = isRetrait;
 	}
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Double getArgentDepose() {
+		return argentDepose;
+	}
+	public void setArgentDepose(Double argentDepose) {
+		this.argentDepose = argentDepose;
+	}
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 }
