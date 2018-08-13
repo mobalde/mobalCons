@@ -17,10 +17,8 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = -4001045433013835005L;
 
-	@Column(name="date_debut", nullable=false)
-	private LocalDate dateDebut;
-	@Column(name="date_fin", nullable=false)
-	private LocalDate dateFin;
+	@Column(name="date_vente", nullable=false)
+	private LocalDate dateVente;
 	@Column(nullable=false)
 	private int quantite;
 	@Column(name="prix_unitaire")
@@ -40,20 +38,12 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 		super();
 	}
 
-	public LocalDate getDateDebut() {
-		return dateDebut;
+	public LocalDate getDateVente() {
+		return this.dateVente;
 	}
 
-	public void setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-
-	public LocalDate getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(LocalDate dateFin) {
-		this.dateFin = dateFin;
+	public void setDateVente(LocalDate dateV) {
+		this.dateVente = dateV;
 	}
 
 	public int getQuantite() {

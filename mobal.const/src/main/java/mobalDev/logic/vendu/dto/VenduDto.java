@@ -3,23 +3,16 @@ package mobalDev.logic.vendu.dto;
 import java.time.LocalDate;
 
 public class VenduDto {
-	private LocalDate dateDebut;
-	private LocalDate dateFin;
+	private LocalDate dateVente;
 	private int quantite;
 	private Double prixUnitaire;
 	private double total;
 	private Long idProduit;
-	public LocalDate getDateDebut() {
-		return dateDebut;
+	public LocalDate getdateVente() {
+		return this.dateVente;
 	}
-	public void setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-	public LocalDate getDateFin() {
-		return dateFin;
-	}
-	public void setDateFin(LocalDate dateFin) {
-		this.dateFin = dateFin;
+	public void setdateVente(LocalDate dateVente) {
+		this.dateVente = dateVente;
 	}
 	public int getQuantite() {
 		return quantite;

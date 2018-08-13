@@ -1,8 +1,11 @@
 package mobalDev.logic.vendu;
 
-import mobalDev.logic.CrudGenerique;
+import java.util.List;
 
-public interface GestionVente extends CrudGenerique{
+import mobalDev.logic.vendu.dto.VenduDto;
 
+public interface GestionVente{
+
+	public void registration(List<VenduDto> list);
 	
 }
