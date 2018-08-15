@@ -78,7 +78,7 @@ public class UtilisateurController{
 			String mail = (String) session.getAttribute(CURRENT_USER);
 			return (mail.equals(email));
 		}
-		return false;
+		return this.logoutPage(null, null, session);
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
