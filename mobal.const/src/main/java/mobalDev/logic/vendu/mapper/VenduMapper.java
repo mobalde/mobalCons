@@ -2,11 +2,13 @@ package mobalDev.logic.vendu.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.model.VenduEntity;
 
+@Component
 public class VenduMapper implements SourceDestinationMapper<VenduEntity, VenduDto>{
 	
 	@Autowired

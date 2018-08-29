@@ -28,7 +28,6 @@ public class VenduController {
 	
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	public boolean saveVente(HttpSession session, @RequestBody List<VenduDto> listVente){
-		System.out.println("____ check");
-		return true;
+		return this.gestionVente.registration(listVente);
 	}
 }

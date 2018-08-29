@@ -14,6 +14,8 @@ create table vendu_in_banque(
 	update_at timestamp without time zone,
 	modificationcounter integer not null,
 	is_depot_banque boolean default false,
+	debut_semaine date not null,
+	fin_semaine date not null,
 	PRIMARY KEY(id)
 );
 

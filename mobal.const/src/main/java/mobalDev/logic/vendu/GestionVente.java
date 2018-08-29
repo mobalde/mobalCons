@@ -6,6 +6,6 @@ import mobalDev.logic.vendu.dto.VenduDto;
 
 public interface GestionVente{
 
-	public void registration(List<VenduDto> list);
+	public boolean registration(List<VenduDto> list);
 	
 }
