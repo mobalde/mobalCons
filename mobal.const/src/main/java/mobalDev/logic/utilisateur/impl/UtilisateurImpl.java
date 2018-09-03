@@ -86,7 +86,7 @@ public class UtilisateurImpl implements GestionUtilisateur{
 		utilisateurDto.setRole(roles);
 		utilisateurDto.setResponses("Authenification reussie");
 		session.setAttribute("currentUser", utilisateurDto.getEmail());
-		session.setMaxInactiveInterval(30*60); // 20mn (1min->60s)
+		// session.setMaxInactiveInterval(30*60); // 20mn (1min->60s)
 		return utilisateurDto;
 	}
 

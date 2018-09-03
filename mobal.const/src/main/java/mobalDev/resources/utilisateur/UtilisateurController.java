@@ -74,11 +74,11 @@ public class UtilisateurController{
 	
 	@RequestMapping(path = "/currentUser/{email:.+}", method = RequestMethod.GET)
 	public boolean isConnecter(HttpSession session, @PathVariable String email){
-		if(session.getAttribute(CURRENT_USER) != null && session.getMaxInactiveInterval() == 1800){
+		if(session.getAttribute(CURRENT_USER) != null){
 			String mail = (String) session.getAttribute(CURRENT_USER);
 			return (mail.equals(email));
 		}
-		return this.logoutPage(null, null, session);
+		return false;
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)

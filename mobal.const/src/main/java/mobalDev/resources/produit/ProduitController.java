@@ -1,5 +1,7 @@
 package mobalDev.resources.produit;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +33,13 @@ public class ProduitController {
 	@RequestMapping(path = "/ajout/produit", method = RequestMethod.POST)
 	public void produitAdd(HttpSession session, @RequestBody ProduitDto dto){
 		this.gestionProduit.registration(dto);
+	}
+	
+	
+	@PreAuthorize(AuthorisationUser.PDG)
+	@RequestMapping(path = "/produit/all", method = RequestMethod.GET)
+	public List<ProduitDto> getProduitAll(HttpSession session){
+		return this.gestionProduit.getAllProduit();
 	}
 	
 	

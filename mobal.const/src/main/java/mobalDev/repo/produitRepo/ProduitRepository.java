@@ -7,4 +7,5 @@ import mobalDev.model.ProduitEntity;
 public interface ProduitRepository extends JpaRepository<ProduitEntity, Long>{
 
 	ProduitEntity findByLibelle(String libelle);
+	
 }

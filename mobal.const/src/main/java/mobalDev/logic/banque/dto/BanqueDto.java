@@ -13,8 +13,6 @@ public class BanqueDto {
 	private boolean isDepot;
 	private boolean isRetrait;
 	
-	// private VenduEntity vendu;
-	
 	public LocalDate getDateDepot() {
 		return dateDepot;
 	}

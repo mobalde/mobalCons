@@ -3,6 +3,10 @@
  */
 package mobalDev.logic.produit.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
@@ -50,6 +54,18 @@ public class ProduitImpl implements GestionProduit{
 			produitDto = this.produitMapper.convertEntityToDto(produitEntity);
 		}
 		return produitDto;
+	}
+
+	@Override
+	public List<ProduitDto> getAllProduit() {
+		
+		List<ProduitEntity> listProduit = this.produitRepo.findAll();
+		List<ProduitDto> listP = listProduit.stream().map(x -> {
+			ProduitDto produitDto = this.produitMapper.convertEntityToDto(x);
+			return produitDto;
+		}).collect(Collectors.toList());
+		
+		return listP;
 	}
 
 }
