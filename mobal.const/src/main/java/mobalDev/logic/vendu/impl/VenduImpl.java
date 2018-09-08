@@ -3,12 +3,12 @@ package mobalDev.logic.vendu.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.logic.vendu.GestionVente;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.logic.vendu.mapper.VenduMapper;
@@ -24,16 +24,16 @@ import mobalDev.repo.venduRepo.VenduRepository;
 @Component
 public class VenduImpl implements GestionVente{
 
-	@Autowired
+	@Inject
 	VenduRepository venduRepo;
 	
-	@Autowired
+	@Inject
 	VenduMapper venduMapper;
 	
-	@Autowired
+	@Inject
 	VenduInBanqueRepository venduInBaRepo;
 	
-	@Autowired
+	@Inject
 	ProduitRepository produitRepo;;
 	
 	

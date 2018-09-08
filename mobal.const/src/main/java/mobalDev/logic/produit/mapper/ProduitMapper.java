@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.produit.dto.ProduitDto;
-import mobalDev.logic.utilisateur.dto.UtilisateurDto;
 import mobalDev.model.ProduitEntity;
 
 @Component

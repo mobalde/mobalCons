@@ -22,7 +22,7 @@ import mobalDev.repo.produitRepo.ProduitRepository;
 @Component
 public class MarchandiseImpl implements GestionMarchandise{
 	
-	@Autowired
+	@Inject
 	MarchandiseRepository marchandiseRepo;
 	
 	@Inject
