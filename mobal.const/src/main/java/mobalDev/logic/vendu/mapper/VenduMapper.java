@@ -16,7 +16,13 @@ public class VenduMapper implements SourceDestinationMapper<VenduEntity, VenduDt
 
 	@Override
 	public VenduDto convertEntityToDto(VenduEntity entity) {
-		return this.modelMaper.map(entity, VenduDto.class);
+		VenduDto dto = new VenduDto();
+		dto.setdateVente(entity.getDateVente());
+		dto.setIdProduit(entity.getProduit().getId());
+		dto.setPrixUnitaire(entity.getPrixUnitaire());
+		dto.setQuantite(entity.getQuantite());
+		dto.setTotal(entity.getTotal());
+		return dto;
 	}
 
 	@Override

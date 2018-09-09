@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,7 +26,7 @@ public class VenduInBanqueEntity extends AbstractEntity{
 	@OneToOne(mappedBy = "venduInBanque")
 	private BanqueEntity banque;
 	
-	@OneToMany(mappedBy = "venduInBanque")
+	@OneToMany(mappedBy = "venduInBanque", fetch=FetchType.LAZY)
 	private Set<VenduEntity> venduEntity;
 	
 	public VenduInBanqueEntity(){

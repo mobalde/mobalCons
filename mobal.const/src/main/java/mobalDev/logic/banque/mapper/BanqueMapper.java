@@ -1,5 +1,7 @@
 package mobalDev.logic.banque.mapper;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
@@ -8,17 +10,18 @@ import mobalDev.model.BanqueEntity;
 
 @Component
 public class BanqueMapper implements SourceDestinationMapper<BanqueEntity,BanqueDto>{
+	
+	@Autowired
+	private ModelMapper modelMaper;
 
 	@Override
 	public BanqueDto convertEntityToDto(BanqueEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.modelMaper.map(entity, BanqueDto.class);
 	}
 
 	@Override
 	public BanqueEntity convertDtoToEntity(BanqueDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.modelMaper.map(dto, BanqueEntity.class);
 	}
 
 }

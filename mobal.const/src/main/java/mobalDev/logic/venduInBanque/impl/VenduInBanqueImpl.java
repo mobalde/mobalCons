@@ -4,6 +4,7 @@
 package mobalDev.logic.venduInBanque.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import mobalDev.logic.venduInBanque.GestionVenduInBanque;
+import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 import mobalDev.logic.venduInBanque.mapper.VenduInBanqueMapper;
 import mobalDev.model.VenduInBanqueEntity;
 import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
@@ -39,10 +41,18 @@ public class VenduInBanqueImpl implements GestionVenduInBanque{
 	}
 
 	@Override
-	public List<VenduInBanqueEntity> listeDeVenteProduitNonDeposer(String libelleProduit) {
+	public List<VenduInBanqueDto> listeDeVenteProduitNonDeposer(String libelleProduit) {
 		
+		List<VenduInBanqueEntity> listVenduInBanque = this.venduInBanqueRepo.findAllNotVenduInBanqueForProduit(libelleProduit);
 		
-		return null;
+		List<VenduInBanqueDto> listVenduDto = listVenduInBanque.stream()
+												.map(m -> {
+													VenduInBanqueDto dto = this.venduInBanqueMapper.convertEntityToDto(m);
+													return dto;
+												})
+												.collect(Collectors.toList());
+		
+		return listVenduDto;
 	}
 
 }

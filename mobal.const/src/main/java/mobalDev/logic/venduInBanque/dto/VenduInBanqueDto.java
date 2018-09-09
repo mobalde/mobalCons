@@ -3,8 +3,8 @@ package mobalDev.logic.venduInBanque.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import mobalDev.model.BanqueEntity;
-import mobalDev.model.VenduEntity;
+import mobalDev.logic.banque.dto.BanqueDto;
+import mobalDev.logic.vendu.dto.VenduDto;
 
 public class VenduInBanqueDto {
 
@@ -13,8 +13,8 @@ public class VenduInBanqueDto {
 	private LocalDate debutSemaine;
 	private LocalDate finSemaine;
 	
-	private BanqueEntity banque;
-	private List<VenduEntity> venduEntity;
+	private BanqueDto banqueDto;
+	private List<VenduDto> venduDto;
 	
 	public Long getId() {
 		return id;
@@ -40,16 +40,17 @@ public class VenduInBanqueDto {
 	public void setFinSemaine(LocalDate finSemaine) {
 		this.finSemaine = finSemaine;
 	}
-	public BanqueEntity getBanque() {
-		return banque;
+	public BanqueDto getBanqueDto() {
+		return banqueDto;
 	}
-	public void setBanque(BanqueEntity banque) {
-		this.banque = banque;
+	public void setBanqueDto(BanqueDto banqueDto) {
+		this.banqueDto = banqueDto;
 	}
-	public List<VenduEntity> getVenduEntity() {
-		return venduEntity;
+	public List<VenduDto> getVenduDto() {
+		return venduDto;
 	}
-	public void setVenduEntity(List<VenduEntity> venduEntity) {
-		this.venduEntity = venduEntity;
+	public void setVenduDto(List<VenduDto> venduDto) {
+		this.venduDto = venduDto;
 	}
+	
 }
