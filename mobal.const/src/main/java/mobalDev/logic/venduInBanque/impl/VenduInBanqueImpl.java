@@ -47,8 +47,7 @@ public class VenduInBanqueImpl implements GestionVenduInBanque{
 		
 		List<VenduInBanqueDto> listVenduDto = listVenduInBanque.stream()
 												.map(m -> {
-													VenduInBanqueDto dto = this.venduInBanqueMapper.convertEntityToDto(m);
-													return dto;
+													return this.venduInBanqueMapper.convertEntityToDto(m);
 												})
 												.collect(Collectors.toList());
 		

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
+import mobalDev.logic.banque.dto.BanqueDto;
 import mobalDev.logic.banque.mapper.BanqueMapper;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.logic.vendu.mapper.VenduMapper;
@@ -40,7 +41,7 @@ public class VenduInBanqueMapper implements SourceDestinationMapper<VenduInBanqu
 		
 		VenduInBanqueDto dto = new VenduInBanqueDto();
 		
-		dto.setBanqueDto(entity.getBanque() != null ? this.banqueMapper.convertEntityToDto(entity.getBanque()) : null);
+		dto.setBanqueDto(entity.getBanque() != null ? this.banqueMapper.convertEntityToDto(entity.getBanque()) : new BanqueDto());
 		dto.setDebutSemaine(entity.getDebutSemaine());
 		dto.setFinSemaine(entity.getFinSemaine());
 		dto.setDepotBanque(entity.isDepotBanque());
