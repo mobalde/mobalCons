@@ -41,7 +41,7 @@ public class VenduInBanqueMapper implements SourceDestinationMapper<VenduInBanqu
 		
 		VenduInBanqueDto dto = new VenduInBanqueDto();
 		
-		dto.setBanqueDto(entity.getBanque() != null ? this.banqueMapper.convertEntityToDto(entity.getBanque()) : new BanqueDto());
+		dto.setBanqueDto(entity.getBanque() != null ? this.banqueMapper.convertEntityToDto(entity.getBanque()) : null);
 		dto.setDebutSemaine(entity.getDebutSemaine());
 		dto.setFinSemaine(entity.getFinSemaine());
 		dto.setDepotBanque(entity.isDepotBanque());
@@ -54,6 +54,7 @@ public class VenduInBanqueMapper implements SourceDestinationMapper<VenduInBanqu
 										 return vDto;
 									 }).collect(Collectors.toList());
 		dto.setVenduDto(listes);
+		dto.setTotalVente(entity.getVenduEntity().stream().filter(x -> x!=null).mapToDouble(x -> x.getTotal()).sum());
 		return dto;
 	}
 

@@ -16,6 +16,8 @@ public class VenduInBanqueDto {
 	private BanqueDto banqueDto;
 	private List<VenduDto> venduDto;
 	
+	private Double totalVente;
+	
 	public Long getId() {
 		return id;
 	}
@@ -52,5 +54,10 @@ public class VenduInBanqueDto {
 	public void setVenduDto(List<VenduDto> venduDto) {
 		this.venduDto = venduDto;
 	}
-	
+	public Double getTotalVente() {
+		return totalVente;
+	}
+	public void setTotalVente(Double totalVente) {
+		this.totalVente = totalVente;
+	}
 }
