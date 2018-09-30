@@ -42,11 +42,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.csrf().disable().
-			authorizeRequests()
+			.authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/images/**", "/mobalc/login").permitAll()
 			.anyRequest().authenticated()
-			.and();
+			.and()
+			.csrf().disable()
+			.sessionManagement().maximumSessions(1);
 	}
 	
 	// Allow OPTIONS calls to be accessed without authentication
