@@ -1,5 +1,5 @@
 package mobalDev.logic;
 
-public interface CrudGenerique {
-	public <T> void registration(T a);
+public interface CrudGenerique<T> {
+	public void registration(T a);
 }

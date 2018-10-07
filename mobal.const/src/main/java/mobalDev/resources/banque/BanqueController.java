@@ -4,14 +4,17 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import mobalDev.General.AuthorisationUser;
 import mobalDev.logic.banque.GestionBanque;
 import mobalDev.logic.banque.dto.BanqueDto;
+import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
@@ -24,8 +27,15 @@ public class BanqueController {
 	@Inject
 	private GestionBanque gestionBanque;
 	
-	@RequestMapping(path = "/add/banque", method = RequestMethod.POST)
-	private void registration(HttpSession session, @RequestBody BanqueDto dto){
+	@PreAuthorize(AuthorisationUser.PDG)
+	@RequestMapping(path = "/save/venteSemaine", method = RequestMethod.POST)
+	public void registration(HttpSession session, @RequestBody VenduInBanqueDto dto){
 		this.gestionBanque.registration(dto);
+	}
+	
+	@PreAuthorize(AuthorisationUser.PDG)
+	@RequestMapping(path = "/getsoldeanterieur", method = RequestMethod.GET)
+	public Double getSoldeAnterieur(){
+		return this.getSoldeAnterieur();
 	}
 }

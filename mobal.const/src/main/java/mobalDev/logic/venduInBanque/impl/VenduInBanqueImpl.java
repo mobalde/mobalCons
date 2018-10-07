@@ -32,19 +32,11 @@ public class VenduInBanqueImpl implements GestionVenduInBanque{
 	
 	@Inject
 	private VenduInBanqueMapper venduInBanqueMapper;
-	
-	
-	@Override
-	public <T> void registration(T a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<VenduInBanqueDto> listeDeVenteProduitNonDeposer(String libelleProduit) {
 		
 		List<VenduInBanqueEntity> listVenduInBanque = this.venduInBanqueRepo.findAllNotVenduInBanqueForProduit(libelleProduit);
-		
 		List<VenduInBanqueDto> listVenduDto = listVenduInBanque.stream()
 												.map(m -> {
 													return this.venduInBanqueMapper.convertEntityToDto(m);

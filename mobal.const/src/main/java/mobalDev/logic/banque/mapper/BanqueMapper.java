@@ -23,5 +23,9 @@ public class BanqueMapper implements SourceDestinationMapper<BanqueEntity,Banque
 	public BanqueEntity convertDtoToEntity(BanqueDto dto) {
 		return this.modelMaper.map(dto, BanqueEntity.class);
 	}
+	
+	public Double getSoldeAnterieur(Object[] obj){
+		return obj != null ? (Double)obj[1] : 0;
+	}
 
 }

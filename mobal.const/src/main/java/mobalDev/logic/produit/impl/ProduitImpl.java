@@ -3,7 +3,6 @@
  */
 package mobalDev.logic.produit.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,11 +29,8 @@ public class ProduitImpl implements GestionProduit{
 	@Inject
 	ProduitMapper produitMapper;
 
-	@SuppressWarnings("hiding")
 	@Override
-	public <Object> void registration(Object dto) {
-		
-		ProduitDto produitDto = (ProduitDto) dto;
+	public void registration(ProduitDto produitDto) {
 		ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(produitDto);
 		produitEntity.setId(null);
 		this.produitRepo.saveAndFlush(produitEntity);

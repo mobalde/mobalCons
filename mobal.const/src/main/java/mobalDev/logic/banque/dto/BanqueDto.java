@@ -12,6 +12,7 @@ public class BanqueDto {
 	private Double total;
 	private boolean isDepot;
 	private boolean isRetrait;
+	private Double soldeAnterieur;
 	
 	public LocalDate getDateDepot() {
 		return dateDepot;
@@ -60,5 +61,11 @@ public class BanqueDto {
 	}
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+	public Double getSoldeAnterieur() {
+		return soldeAnterieur;
+	}
+	public void setSoldeAnterieur(Double soldeAnterieur) {
+		this.soldeAnterieur = soldeAnterieur;
 	}
 }

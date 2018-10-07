@@ -105,4 +105,13 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	public void setRetrait(boolean isRetrait) {
 		this.isRetrait = isRetrait;
 	}
+
+	public VenduInBanqueEntity getVenduInBanque() {
+		return venduInBanque;
+	}
+
+	public void setVenduInBanque(VenduInBanqueEntity venduInBanque) {
+		this.venduInBanque = venduInBanque;
+	}
+	
 }
