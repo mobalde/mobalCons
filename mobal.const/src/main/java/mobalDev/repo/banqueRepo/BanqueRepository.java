@@ -8,7 +8,7 @@ import mobalDev.model.BanqueEntity;
 
 public interface BanqueRepository extends JpaRepository<BanqueEntity, Long>{
 	
-	@Query(value = "SELECT b.soldeAnterieur, MAX(b.id) FROM BanqueEntity")
-	Object[] findLastSolde();
+	@Query(value = "SELECT b.soldeAnterieur FROM BanqueEntity b WHERE b.venduInBanque.id = :id")
+	Double findLastSolde(@Param("id") Long id);
 
 }

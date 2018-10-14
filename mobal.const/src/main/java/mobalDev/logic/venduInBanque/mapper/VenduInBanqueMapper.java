@@ -4,6 +4,7 @@
 package mobalDev.logic.venduInBanque.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.logic.vendu.mapper.VenduMapper;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 import mobalDev.model.VenduInBanqueEntity;
+import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
 
 /**
  * @author balde
@@ -35,6 +37,9 @@ public class VenduInBanqueMapper implements SourceDestinationMapper<VenduInBanqu
 	
 	@Inject
 	private VenduMapper venduMapper;
+	
+	@Inject
+	private VenduInBanqueRepository venduInBaRepo;
 
 	@Override
 	public VenduInBanqueDto convertEntityToDto(VenduInBanqueEntity entity) {
@@ -60,7 +65,15 @@ public class VenduInBanqueMapper implements SourceDestinationMapper<VenduInBanqu
 
 	@Override
 	public VenduInBanqueEntity convertDtoToEntity(VenduInBanqueDto dto) {
-		return this.modelMaper.map(dto, VenduInBanqueEntity.class);
+		Optional<VenduInBanqueEntity> entity = this.venduInBaRepo.findById(dto.getId());
+		VenduInBanqueEntity v;
+		if(entity.isPresent()){
+			v = entity.get();
+			v.setDepotBanque(dto.isDepotBanque());
+		}else{
+			v = null;
+		}
+		return v;
 	}
 
 }

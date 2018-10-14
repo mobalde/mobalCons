@@ -24,8 +24,8 @@ public class BanqueMapper implements SourceDestinationMapper<BanqueEntity,Banque
 		return this.modelMaper.map(dto, BanqueEntity.class);
 	}
 	
-	public Double getSoldeAnterieur(Object[] obj){
-		return obj != null ? (Double)obj[1] : 0;
+	public Double getSoldeAnterieur(Double solde){
+		return solde != null ? solde : 0;
 	}
 
 }

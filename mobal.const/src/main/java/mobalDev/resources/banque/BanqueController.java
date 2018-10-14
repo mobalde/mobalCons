@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,13 +30,14 @@ public class BanqueController {
 	
 	@PreAuthorize(AuthorisationUser.PDG)
 	@RequestMapping(path = "/save/venteSemaine", method = RequestMethod.POST)
-	public void registration(HttpSession session, @RequestBody VenduInBanqueDto dto){
+	public boolean registration(HttpSession session, @RequestBody VenduInBanqueDto dto){
 		this.gestionBanque.registration(dto);
+		return true;
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG)
-	@RequestMapping(path = "/getsoldeanterieur", method = RequestMethod.GET)
-	public Double getSoldeAnterieur(){
-		return this.getSoldeAnterieur();
+	@RequestMapping(path = "/getsoldeanterieur/{id}", method = RequestMethod.GET)
+	public Double getSoldeAnterieur(@PathVariable Long id){
+		return this.gestionBanque.getSoldeAnterieur(id);
 	}
 }

@@ -10,8 +10,8 @@ public class BanqueDto {
 	private String numeroTicket;
 	private Double argentDepose;
 	private Double total;
-	private boolean isDepot;
-	private boolean isRetrait;
+	private boolean depot;
+	private boolean retrait;
 	private Double soldeAnterieur;
 	
 	public LocalDate getDateDepot() {
@@ -31,18 +31,6 @@ public class BanqueDto {
 	}
 	public void setNumeroTicket(String numeroTicket) {
 		this.numeroTicket = numeroTicket;
-	}
-	public boolean isDepot() {
-		return isDepot;
-	}
-	public void setDepot(boolean isDepot) {
-		this.isDepot = isDepot;
-	}
-	public boolean isRetrait() {
-		return isRetrait;
-	}
-	public void setRetrait(boolean isRetrait) {
-		this.isRetrait = isRetrait;
 	}
 	public Long getId() {
 		return id;
@@ -67,5 +55,17 @@ public class BanqueDto {
 	}
 	public void setSoldeAnterieur(Double soldeAnterieur) {
 		this.soldeAnterieur = soldeAnterieur;
+	}
+	public boolean isDepot() {
+		return depot;
+	}
+	public void setDepot(boolean depot) {
+		this.depot = depot;
+	}
+	public boolean isRetrait() {
+		return retrait;
+	}
+	public void setRetrait(boolean retrait) {
+		this.retrait = retrait;
 	}
 }

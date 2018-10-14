@@ -1,5 +1,6 @@
 package mobalDev.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="vendu_in_banque")
-public class VenduInBanqueEntity extends AbstractEntity{
+public class VenduInBanqueEntity extends AbstractEntity implements Serializable{
 	
 	@Column(name="is_depot_banque", nullable=false)
 	private boolean isDepotBanque;

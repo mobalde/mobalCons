@@ -1,10 +1,12 @@
 package mobalDev.logic.banque;
 
+import javax.validation.constraints.NotNull;
+
 import mobalDev.logic.CrudGenerique;
 import mobalDev.logic.banque.dto.BanqueDto;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 
 public interface GestionBanque extends CrudGenerique<VenduInBanqueDto>{
 	
-	public Double getSoldeAnterieur();
+	public Double getSoldeAnterieur(@NotNull Long id);
 }

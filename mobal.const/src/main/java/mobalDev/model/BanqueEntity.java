@@ -37,10 +37,6 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
 	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
 	private VenduInBanqueEntity venduInBanque;
-	
-	protected BanqueEntity() {
-		super();
-	}
 
 	public LocalDate getDateDepot() {
 		return dateDepot;

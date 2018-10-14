@@ -9,7 +9,6 @@ import mobalDev.logic.vendu.dto.VenduDto;
 public class VenduInBanqueDto {
 
 	Long id;
-	private boolean isDepotBanque;
 	private LocalDate debutSemaine;
 	private LocalDate finSemaine;
 	
@@ -18,17 +17,13 @@ public class VenduInBanqueDto {
 	
 	private Double totalVente;
 	
+	private boolean depotBanque;
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public boolean isDepotBanque() {
-		return isDepotBanque;
-	}
-	public void setDepotBanque(boolean isDepotBanque) {
-		this.isDepotBanque = isDepotBanque;
 	}
 	public LocalDate getDebutSemaine() {
 		return debutSemaine;
@@ -59,5 +54,11 @@ public class VenduInBanqueDto {
 	}
 	public void setTotalVente(Double totalVente) {
 		this.totalVente = totalVente;
+	}
+	public boolean isDepotBanque() {
+		return depotBanque;
+	}
+	public void setDepotBanque(boolean depotBanque) {
+		this.depotBanque = depotBanque;
 	}
 }
