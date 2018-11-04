@@ -1,5 +1,6 @@
 package mobalDev.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
-public class User extends AbstractEntity {
+public class User extends AbstractEntity  implements Serializable{
 
 	@NotNull
 	private String Nom;

@@ -1,0 +1,1 @@
+-- insert into users (id,modificationcounter,Nom,prenom,email,password,enabled) values(1, 0, 'CONST', 'Mobal', 'mobal.const@test.fr', 'mobal', true);
