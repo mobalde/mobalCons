@@ -81,7 +81,7 @@ public class UtilisateurController{
 		return false;
 	}
 	
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	@RequestMapping(path="/logout", method = RequestMethod.GET)
 	public boolean logoutPage (HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null && session.getAttribute(CURRENT_USER) != null){    

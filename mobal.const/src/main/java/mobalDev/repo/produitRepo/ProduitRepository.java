@@ -8,4 +8,6 @@ public interface ProduitRepository extends JpaRepository<ProduitEntity, Long>{
 
 	ProduitEntity findByLibelle(String libelle);
 	
+	ProduitEntity findByLibelleAndQuantiteCommande(String libelle, int quantiteCommande);
+	
 }

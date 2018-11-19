@@ -14,6 +14,7 @@ import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.model.ProduitEntity;
+import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
 import mobalDev.repo.produitRepo.ProduitRepository;
 
 /**
@@ -28,12 +29,27 @@ public class ProduitImpl implements GestionProduit{
 	
 	@Inject
 	ProduitMapper produitMapper;
+	
+	@Inject
+	private HistoriqueProduitRepository histoRepo;
 
 	@Override
-	public void registration(ProduitDto produitDto) {
-		ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(produitDto);
-		produitEntity.setId(null);
-		this.produitRepo.saveAndFlush(produitEntity);
+	public void registration(ProduitDto dto) {
+		
+		ProduitEntity entity = this.produitRepo.findByLibelle(dto.getLibelle());
+		if(entity != null) {
+			// update si dto.quantite != entity.quantite
+			if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
+				this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(entity)); // save produit in table historique
+				entity.setQuantiteCommande(dto.getQuantiteCommande());
+				this.produitRepo.saveAndFlush(entity);
+			}
+		} else {
+			// new produit
+			ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
+			produitEntity.setId(null);
+			this.produitRepo.saveAndFlush(entity);
+		}
 	}
 
 	@Override

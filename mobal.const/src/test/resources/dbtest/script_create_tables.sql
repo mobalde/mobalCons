@@ -30,3 +30,13 @@ Alter table user_roles add CONSTRAINT fk_user_roles FOREIGN KEY(user_id) REFEREN
 Alter table user_roles add CONSTRAINT fk_role_user FOREIGN KEY(role_id) REFERENCES role(id);
 
 insert into role (id,modificationcounter, role) values (1, 0, 'ROLE_ADMIN'),(2, 0, 'ROLE_DG'),(3, 0, 'ROLE_COMMERCANT');
+
+create table historique_produit(
+	id BIGSERIAL NOT NULL,
+	create_at timestamp without time zone,
+	update_at timestamp without time zone,
+	modificationcounter integer not null,
+	libelle varchar(500) not null,
+	quantite integer not null,
+	PRIMARY KEY(id)
+);

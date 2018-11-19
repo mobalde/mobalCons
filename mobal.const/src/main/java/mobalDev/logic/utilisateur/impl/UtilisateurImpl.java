@@ -97,12 +97,22 @@ public class UtilisateurImpl implements GestionUtilisateur{
 	 * 
 	 */
 	@Override
-	public UtilisateurDto registration(UtilisateurDao utilisateurDao){
-
+	public UtilisateurDto registration(UtilisateurDao dao){
+		
+		if(this.utilisateurRepo.findByEmail(dao.getEmail()) == null) {
+			Role role = this.roleRepository.findByRole(dao.getRole());
+			return this.utilisateurMapper.convertEntityToDto(this.saveUser(dao, role));
+		} else {
+			UtilisateurDto utilisateurDto = modelMapper.map(dao, UtilisateurDto.class);
+			utilisateurDto.setResponses("L'utilisateur<email> "+dao.getEmail()+" Existe dejà");
+			return utilisateurDto;
+		}
+	}
+	
+	private User saveUser(UtilisateurDao utilisateurDao, Role role) {
+		
 		List<Role> roles = new ArrayList<>();
 		User user = new User();
-		// On recupere le role
-		Role role = this.roleRepository.findByRole(utilisateurDao.getRole());
 		roles.add(role);	
 		user.setPassword(utilisateurDao.getPassword());
 		user.setEmail(utilisateurDao.getEmail());
@@ -112,14 +122,10 @@ public class UtilisateurImpl implements GestionUtilisateur{
 		user.setPrenom(utilisateurDao.getPrenom());
 		user.setCreate_at(LocalDateTime.now());
 		user.setRole(roles);
-		try{
-			this.utilisateurRepo.saveAndFlush(user);
-			return this.utilisateurMapper.convertEntityToDto(user);
-		}catch(Exception e){
-			UtilisateurDto utilisateurDto = modelMapper.map(utilisateurDao, UtilisateurDto.class);
-			utilisateurDto.setResponses("L'utilisateur<email> "+utilisateurDao.getEmail()+" Existe dejà");
-			return utilisateurDto;
-		}
+		
+		this.utilisateurRepo.saveAndFlush(user);
+		
+		return user;
 	}
 
 }
