@@ -3,6 +3,7 @@
  */
 package mobalDev.logic.produit.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
+import mobalDev.logic.produit.dto.TypeProduitEnum;
 import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.model.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
@@ -36,7 +38,7 @@ public class ProduitImpl implements GestionProduit{
 	@Override
 	public void registration(ProduitDto dto) {
 		
-		ProduitEntity entity = this.produitRepo.findByLibelle(dto.getLibelle());
+		ProduitEntity entity = this.produitRepo.findByType(dto.getType());
 		if(entity != null) {
 			// update si dto.quantite != entity.quantite
 			if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
@@ -54,30 +56,56 @@ public class ProduitImpl implements GestionProduit{
 
 	@Override
 	public int getQuantiteCommande(String libelle) {
-		ProduitDto produitDto = this.getProduit(libelle);
-		return produitDto.getQuantiteCommande();
+		List<ProduitDto> produitDto = this.getProduit(libelle);
+		int quantite = 0;
+		if(produitDto != null || produitDto.isEmpty()) {
+			quantite = produitDto.stream().mapToInt(x->x.getQuantiteCommande()).sum();
+		}
+		return quantite;
 	}
 
 	@Override
-	public ProduitDto getProduit(String libelle) {
-		ProduitDto produitDto = new ProduitDto();
-		ProduitEntity produitEntity = this.produitRepo.findByLibelle(libelle);
+	public List<ProduitDto> getProduit(String libelle) {
+		List<ProduitDto> dto = new ArrayList<>();
+		List<ProduitEntity> produitEntity = this.produitRepo.findByLibelle(libelle);
 		if(produitEntity != null){
-			produitDto = this.produitMapper.convertEntityToDto(produitEntity);
+			dto = produitEntity.stream().filter(x->x!=null)
+							   .map(x->{
+								  return this.produitMapper.convertEntityToDto(x);
+							   }).collect(Collectors.toList());
 		}
-		return produitDto;
+		return dto;
 	}
+	
+	
 
 	@Override
 	public List<ProduitDto> getAllProduit() {
 		
+		List<ProduitDto> listP = new ArrayList<>();
 		List<ProduitEntity> listProduit = this.produitRepo.findAll();
-		List<ProduitDto> listP = listProduit.stream().map(x -> {
-			ProduitDto produitDto = this.produitMapper.convertEntityToDto(x);
-			return produitDto;
-		}).collect(Collectors.toList());
-		
+		if(listProduit != null) {
+			listP = listProduit.stream().map(x -> {
+				return this.produitMapper.convertEntityToDto(x);
+			}).collect(Collectors.toList());
+		}
 		return listP;
+	}
+
+	@Override
+	public ProduitDto getProduit(TypeProduitEnum type) {
+		ProduitEntity entity = this.produitRepo.findByType(type);
+		ProduitDto dto = new ProduitDto();
+		if(entity != null) {
+			dto = this.produitMapper.convertEntityToDto(entity);
+		}
+		return dto;
+	}
+
+	@Override
+	public int getQuantiteCommande(TypeProduitEnum type) {
+		ProduitDto dto = this.getProduit(type);
+		return dto != null ? dto.getQuantiteCommande() : 0;
 	}
 
 }

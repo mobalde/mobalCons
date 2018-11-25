@@ -5,11 +5,15 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import mobalDev.logic.produit.dto.TypeProduitEnum;
 
 @Entity
 @Table(name="produit")
@@ -22,6 +26,9 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	
 	@Column(name = "quantite_commande", nullable = false)
 	private int quantiteCommande;
+	
+	@Enumerated(EnumType.STRING)
+	private TypeProduitEnum type;
 	
 	@OneToMany(mappedBy = "produit")
 	private Set<VenduEntity> vendu;
@@ -64,4 +71,13 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	public void setQuantiteCommande(int quantiteCommande) {
 		this.quantiteCommande = quantiteCommande;
 	}
+
+	public TypeProduitEnum getType() {
+		return type;
+	}
+
+	public void setType(TypeProduitEnum type) {
+		this.type = type;
+	}
+	
 }

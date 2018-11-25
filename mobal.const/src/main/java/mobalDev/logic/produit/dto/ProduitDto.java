@@ -5,6 +5,7 @@ public class ProduitDto {
 	private Long id;
 	private String libelle;
 	private int quantiteCommande;
+	private TypeProduitEnum type;
 	public Long getId() {
 		return id;
 	}
@@ -22,5 +23,11 @@ public class ProduitDto {
 	}
 	public void setQuantiteCommande(int quantiteCommande) {
 		this.quantiteCommande = quantiteCommande;
+	}
+	public TypeProduitEnum getType() {
+		return type;
+	}
+	public void setType(TypeProduitEnum type) {
+		this.type = type;
 	}
 }

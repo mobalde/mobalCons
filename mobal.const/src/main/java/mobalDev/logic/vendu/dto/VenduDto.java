@@ -6,7 +6,7 @@ public class VenduDto {
 	private LocalDate dateVente;
 	private int quantite;
 	private Double prixUnitaire;
-	private double total;
+	private Double total;
 	private Long idProduit;
 	public LocalDate getdateVente() {
 		return this.dateVente;

@@ -38,7 +38,6 @@ public class ProduitTest {
 	
 	private ProduitDto dto;
 	
-	//@Ignore
 	@Test
 	public void addProduit_test() {
 		
