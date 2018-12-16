@@ -13,8 +13,8 @@ public interface VenduInBanqueRepository extends JpaRepository<VenduInBanqueEnti
 	
 	List<VenduInBanqueEntity> findByIsDepotBanqueTrue();
 	
-	@Query(value = "SELECT DISTINCT vib from VenduInBanqueEntity vib" // 
-				+ " INNER JOIN vib.venduEntity v " //
+	@Query(value = "SELECT DISTINCT vib from VenduEntity v" // 
+				+ " INNER JOIN v.venduInBanque vib " //
 				+ " INNER JOIN v.produit p"
 				+ " WHERE p.libelle = :name and vib.isDepotBanque = false")
 	List<VenduInBanqueEntity> findAllNotVenduInBanqueForProduit(@Param("name") String name);

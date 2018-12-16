@@ -35,7 +35,7 @@ public class BanqueImpl implements GestionBanque{
 	private VenduInBanqueMapper venduInBMapper;
 
 	@Override
-	public void registration(VenduInBanqueDto dto) {
+	public boolean registration(VenduInBanqueDto dto) {
 		
 		BanqueEntity entity = this.banqueMapper.convertDtoToEntity(dto.getBanqueDto());
 		entity.setDepot(dto.isDepotBanque());
@@ -44,6 +44,8 @@ public class BanqueImpl implements GestionBanque{
 		entity.setVenduInBanque(v);
 		this.venduInBanqRepo.save(v);
 		this.banqueRepo.saveAndFlush(entity);
+		if(entity.getId() != null) return true;
+		else return false;
 	}
 
 	@Override

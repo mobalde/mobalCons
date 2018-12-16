@@ -32,6 +32,7 @@ public class ProduitMapper implements SourceDestinationMapper<ProduitEntity, Pro
 		HistoriqueProduitEntity histoEntity = new HistoriqueProduitEntity();
 		histoEntity.setLibelle(entity.getLibelle());
 		histoEntity.setQuantite(entity.getQuantiteCommande());
+		histoEntity.setType(entity.getType());
 		
 		return histoEntity;
 	}

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import mobalDev.logic.produit.dto.TypeProduitEnum;
 
@@ -28,6 +29,7 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	private int quantiteCommande;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private TypeProduitEnum type;
 	
 	@OneToMany(mappedBy = "produit")

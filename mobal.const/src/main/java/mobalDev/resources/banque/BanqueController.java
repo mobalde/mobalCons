@@ -31,8 +31,7 @@ public class BanqueController {
 	@PreAuthorize(AuthorisationUser.PDG)
 	@RequestMapping(path = "/save/venteSemaine", method = RequestMethod.POST)
 	public boolean registration(HttpSession session, @RequestBody VenduInBanqueDto dto){
-		this.gestionBanque.registration(dto);
-		return true;
+		return this.gestionBanque.registration(dto);
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG)

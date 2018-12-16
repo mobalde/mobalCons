@@ -31,8 +31,8 @@ public class ProduitController {
 	
 	@PreAuthorize(AuthorisationUser.PDG)
 	@RequestMapping(path = "/ajout/produit", method = RequestMethod.POST)
-	public void produitAdd(HttpSession session, @RequestBody ProduitDto dto){
-		this.gestionProduit.registration(dto);
+	public boolean produitAdd(HttpSession session, @RequestBody ProduitDto dto){
+		return this.gestionProduit.registration(dto);
 	}
 	
 	
@@ -51,7 +51,7 @@ public class ProduitController {
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/produit/{libelle}", method = RequestMethod.GET)
-	public ProduitDto getProduit(@PathVariable("libelle") String libelle){
+	public List<ProduitDto> getProduit(@PathVariable("libelle") String libelle){
 		return this.gestionProduit.getProduit(libelle);
 	}
 

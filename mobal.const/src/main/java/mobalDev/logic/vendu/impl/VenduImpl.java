@@ -40,23 +40,26 @@ public class VenduImpl implements GestionVente{
 	@Override
 	public boolean registration(List<VenduDto> list) {
 		
+		boolean result = false;
 		if(list != null && !list.isEmpty()){
 			VenduInBanqueEntity venduInB = new VenduInBanqueEntity();
 			venduInB.setDepotBanque(false);
 			venduInB.setDebutSemaine(list.get(0).getdateVente());
 			venduInB.setFinSemaine(list.get(list.size()-1).getdateVente());
 			venduInBaRepo.saveAndFlush(venduInB);
-			list.stream().forEach(venduDto -> {
+			for(VenduDto venduDto : list) {
 				Optional<ProduitEntity> produitEnt = this.produitRepo.findById(venduDto.getIdProduit());
-				VenduEntity venduE = venduMapper.convertDtoToEntity(venduDto);
-				venduE.setId(null);
-				venduE.setVenduInBanque(venduInB);
-				venduE.setProduit(produitEnt.get());
-				venduRepo.saveAndFlush(venduE);
-			});
-			return true;
+				if(produitEnt.isPresent()) {
+					VenduEntity venduE = venduMapper.convertDtoToEntity(venduDto);
+					venduE.setId(null);
+					venduE.setVenduInBanque(venduInB);
+					venduE.setProduit(produitEnt.get());
+					venduRepo.saveAndFlush(venduE);
+					result = true;
+				}
+			}
 		}
-		return false;
+		return result;
 	}
 
 }

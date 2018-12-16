@@ -36,29 +36,33 @@ public class ProduitImpl implements GestionProduit{
 	private HistoriqueProduitRepository histoRepo;
 
 	@Override
-	public void registration(ProduitDto dto) {
-		
-		ProduitEntity entity = this.produitRepo.findByType(dto.getType());
-		if(entity != null) {
-			// update si dto.quantite != entity.quantite
-			if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
-				this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(entity)); // save produit in table historique
-				entity.setQuantiteCommande(dto.getQuantiteCommande());
-				this.produitRepo.saveAndFlush(entity);
+	public boolean registration(ProduitDto dto) {
+		boolean result = false;
+		if(dto.getType() != null) {
+			ProduitEntity entity = this.produitRepo.findByType(dto.getType());
+			if(entity != null) {
+				// update si dto.quantite != entity.quantite
+				if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
+					this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(entity)); // save produit in table historique
+					entity.setQuantiteCommande(dto.getQuantiteCommande());
+					this.produitRepo.saveAndFlush(entity);
+					result = true;
+				}
+			} else {
+				// new produit
+				ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
+				this.produitRepo.saveAndFlush(produitEntity);
+				result = true;
 			}
-		} else {
-			// new produit
-			ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
-			produitEntity.setId(null);
-			this.produitRepo.saveAndFlush(entity);
 		}
+		return result;
 	}
 
 	@Override
 	public int getQuantiteCommande(String libelle) {
 		List<ProduitDto> produitDto = this.getProduit(libelle);
 		int quantite = 0;
-		if(produitDto != null || produitDto.isEmpty()) {
+		if(produitDto != null || !produitDto.isEmpty()) {
 			quantite = produitDto.stream().mapToInt(x->x.getQuantiteCommande()).sum();
 		}
 		return quantite;

@@ -43,8 +43,8 @@ public class VenduTest {
 		
 		LocalDate date1 = LocalDate.of(2018, Month.DECEMBER, 2);
 		
-		listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, 2L));
-		listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, 3L));
+		listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, 4L));
+		listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, 4L));
 		
 		boolean isVente = this.venduController.saveVente(session, listVente);
 		assertTrue(isVente);
