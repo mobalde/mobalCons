@@ -1,7 +1,5 @@
 package mobalDev.logic.banque.impl;
 
-import java.util.Optional;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
@@ -37,15 +35,18 @@ public class BanqueImpl implements GestionBanque{
 	@Override
 	public boolean registration(VenduInBanqueDto dto) {
 		
+		boolean result = false;
 		BanqueEntity entity = this.banqueMapper.convertDtoToEntity(dto.getBanqueDto());
-		entity.setDepot(dto.isDepotBanque());
-		entity.setId(null);
-		VenduInBanqueEntity v = this.venduInBMapper.convertDtoToEntity(dto);
-		entity.setVenduInBanque(v);
-		this.venduInBanqRepo.save(v);
-		this.banqueRepo.saveAndFlush(entity);
-		if(entity.getId() != null) return true;
-		else return false;
+		if(entity != null) {
+			entity.setDepot(dto.isDepotBanque());
+			entity.setId(null);
+			VenduInBanqueEntity v = this.venduInBMapper.convertDtoToEntity(dto);
+			entity.setVenduInBanque(v);
+			this.venduInBanqRepo.save(v);
+			this.banqueRepo.saveAndFlush(entity);
+			if(entity.getId() != null) result = true;
+		}
+		return result;
 	}
 
 	@Override

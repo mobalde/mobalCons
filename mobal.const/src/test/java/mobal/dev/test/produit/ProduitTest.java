@@ -10,25 +10,14 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-
-import mobalDev.MobalConstApplication;
+import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.dto.TypeProduitEnum;
 import mobalDev.resources.produit.ProduitController;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {MobalConstApplication.class})
-@TestPropertySource("classpath:application-test.properties")
-@WebAppConfiguration
-public class ProduitTest {
+public class ProduitTest extends ConfigTest{
 	
 	@Inject
 	private ProduitController produitCintroller;
@@ -102,6 +91,7 @@ public class ProduitTest {
 	@Test
 	public void otherFunctionProduit_test() {
 		
+		@SuppressWarnings("unused")
 		int quantite = this.produitCintroller.getQuantiteCommande("ciment");
 		List<ProduitDto> dto = this.produitCintroller.getProduit("ciment");
 		

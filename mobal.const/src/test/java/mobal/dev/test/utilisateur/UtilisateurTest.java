@@ -10,24 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import mobalDev.MobalConstApplication;
+import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
 import mobalDev.model.RoleUtilisateurEnum;
 import mobalDev.resources.utilisateur.UtilisateurController;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {MobalConstApplication.class})
-@TestPropertySource("classpath:application-test.properties")
-@WebAppConfiguration
-public class UtilisateurTest {
+public class UtilisateurTest extends ConfigTest{
 	
    	@Inject
 	private UtilisateurController utilisateurController;
@@ -74,6 +65,7 @@ public class UtilisateurTest {
 		boolean isNonconnecte = this.utilisateurController.isConnecter(session, "test@yahoo.fr");
 		assertFalse(isNonconnecte);
 		
+		@SuppressWarnings("unused")
 		boolean isDeconnexion = this.utilisateurController.logoutPage(request, response, session);
 		assertTrue(isconnecte);
     }

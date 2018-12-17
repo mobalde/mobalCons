@@ -1,13 +1,13 @@
 package mobal.dev.test.config;
 
-public enum LibelleProduit {
+public enum LibelleProduitEnum {
 	CIMENT("ciment"), //
 	BASKET_BALL("basket ball"), //
 	SAC_A_MAIN("sac a main");
 	
 	private String libelle;
 	
-	private LibelleProduit(String libelle) {
+	private LibelleProduitEnum(String libelle) {
 		this.libelle = libelle;
 	}
 

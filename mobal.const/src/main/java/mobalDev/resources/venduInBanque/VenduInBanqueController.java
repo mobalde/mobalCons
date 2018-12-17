@@ -22,7 +22,7 @@ import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 	consumes = MediaType.APPLICATION_JSON_VALUE, 
 	produces = MediaType.APPLICATION_JSON_VALUE
 )
-public class venduInBanqueController {
+public class VenduInBanqueController {
 	
 	@Inject
 	private GestionVenduInBanque gestionVenduInBanque;
