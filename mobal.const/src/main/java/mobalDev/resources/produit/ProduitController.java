@@ -18,7 +18,6 @@ import mobalDev.General.AuthorisationUser;
 import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping(path="/mobalc",
 	consumes = MediaType.APPLICATION_JSON_VALUE, 

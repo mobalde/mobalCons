@@ -17,7 +17,6 @@ import mobalDev.logic.banque.GestionBanque;
 import mobalDev.logic.banque.dto.BanqueDto;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping(path="/mobalc",
 	consumes = MediaType.APPLICATION_JSON_VALUE, 
