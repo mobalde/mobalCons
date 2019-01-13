@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.vendu;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import mobalDev.model.AbstractEntity;
+import mobalDev.model.produit.ProduitEntity;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
+
 @Entity
 @Table(name="vendu")
 public class VenduEntity  extends AbstractEntity implements Serializable {
@@ -19,10 +23,13 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 
 	@Column(name="date_vente", nullable=false)
 	private LocalDate dateVente;
+	
 	@Column(nullable=false)
 	private int quantite;
+	
 	@Column(name="prix_unitaire")
 	private Double prixUnitaire;
+	
 	private double total;
 	
 	// -- optional = true: l'attribut peut etre null
@@ -33,6 +40,9 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
 	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
 	private VenduInBanqueEntity venduInBanque;
+	
+	@Column(name="is_comptabiliser")
+	private boolean isComptabiliser = false;
 	
 	protected VenduEntity() {
 		super();
@@ -84,5 +94,13 @@ public class VenduEntity  extends AbstractEntity implements Serializable {
 
 	public void setVenduInBanque(VenduInBanqueEntity venduInBanque) {
 		this.venduInBanque = venduInBanque;
+	}
+
+	public boolean isComptabiliser() {
+		return isComptabiliser;
+	}
+
+	public void setComptabiliser(boolean isComptabiliser) {
+		this.isComptabiliser = isComptabiliser;
 	}
 }

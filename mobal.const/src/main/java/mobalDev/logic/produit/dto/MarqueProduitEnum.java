@@ -1,14 +1,15 @@
 package mobalDev.logic.produit.dto;
 
-public enum TypeProduitEnum {
+public enum MarqueProduitEnum {
 
 	GI("Ciment GI"), //
 	DIAMOND("Ciment DIAMOND"), //
+	PUMA("Puma"), //
 	AUTRE("Autre");
 	
 	private String libelle;
 	
-	private TypeProduitEnum(String libelle) {
+	private MarqueProduitEnum(String libelle) {
 		this.libelle = libelle;
 	}
 

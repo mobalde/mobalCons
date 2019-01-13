@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import mobal.dev.test.config.ConfigTest;
+import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
-import mobalDev.logic.produit.dto.TypeProduitEnum;
 import mobalDev.resources.produit.ProduitController;
 
 public class ProduitTest extends ConfigTest{
@@ -42,28 +42,28 @@ public class ProduitTest extends ConfigTest{
 		dto = new ProduitDto();
 		dto.setLibelle("basket ball");
 		dto.setQuantiteCommande(400);
-		dto.setType(TypeProduitEnum.AUTRE);
+		dto.setType(MarqueProduitEnum.AUTRE);
 		boolean result_2 = this.produitCintroller.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
 		dto.setQuantiteCommande(1000);
-		dto.setType(TypeProduitEnum.GI);
+		dto.setType(MarqueProduitEnum.GI);
 		boolean result_3 = this.produitCintroller.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
 		dto.setQuantiteCommande(1000);
-		dto.setType(TypeProduitEnum.GI);
+		dto.setType(MarqueProduitEnum.GI);
 		boolean result_4 = this.produitCintroller.produitAdd(session, dto);
 		
 		// Ajout produit sans typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
 		dto.setQuantiteCommande(700);
-		dto.setType(TypeProduitEnum.GI);
+		dto.setType(MarqueProduitEnum.GI);
 		boolean result_5 = this.produitCintroller.produitAdd(session, dto);
 		
 		assertFalse(result_1);

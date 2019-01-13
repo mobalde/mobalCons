@@ -19,7 +19,7 @@ import mobalDev.logic.banque.mapper.BanqueMapper;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.logic.vendu.mapper.VenduMapper;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
-import mobalDev.model.VenduInBanqueEntity;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
 
 /**

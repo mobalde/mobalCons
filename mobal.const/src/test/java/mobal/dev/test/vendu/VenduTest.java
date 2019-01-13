@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 
 import mobal.dev.test.config.ConfigTest;
+import mobalDev.logic.produit.dto.ProduitDto;
+import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.logic.vendu.dto.VenduDto;
+import mobalDev.model.produit.ProduitEntity;
+import mobalDev.repo.produitRepo.ProduitRepository;
 import mobalDev.resources.vendu.VenduController;
 
 public class VenduTest extends ConfigTest{
@@ -25,6 +30,12 @@ public class VenduTest extends ConfigTest{
 	@Inject
 	private VenduController venduController;
 	
+	@Inject
+	private ProduitRepository prodRepo;
+	
+	@Inject 
+	private ProduitMapper prodMapper;
+	
 	VenduDto dto;
 	
 	List<VenduDto> listVente = new ArrayList<>();
@@ -34,8 +45,11 @@ public class VenduTest extends ConfigTest{
 		
 		LocalDate date1 = LocalDate.of(2018, Month.DECEMBER, 2);
 		
-		listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, 4L));
-		listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, 4L));
+		Optional<ProduitEntity> prodEntity = this.prodRepo.findById(4L);
+		ProduitDto prodDto = this.prodMapper.convertEntityToDto(prodEntity.get());
+		
+		listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, prodDto));
+		listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, prodDto));
 		
 		boolean isVente = this.venduController.saveVente(session, listVente);
 		assertTrue(isVente);
@@ -44,11 +58,11 @@ public class VenduTest extends ConfigTest{
 		assertFalse(isNotVente);
 	}
 	
-	private VenduDto setVendu(LocalDate date1, int quantite, Double prixUnitaire, Double total, Long idProduit) {
+	private VenduDto setVendu(LocalDate date1, int quantite, Double prixUnitaire, Double total, ProduitDto prodDto) {
 		
 		dto = new VenduDto();
-		dto.setdateVente(date1);
-		dto.setIdProduit(idProduit);
+		dto.setDateVente(date1);
+		dto.setProduit(prodDto);
 		dto.setPrixUnitaire(prixUnitaire);
 		dto.setQuantite(quantite);
 		dto.setTotal(total);

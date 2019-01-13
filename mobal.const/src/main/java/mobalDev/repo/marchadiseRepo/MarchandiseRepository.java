@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import mobalDev.model.MarchandiseEntity;
+import mobalDev.model.marchandise.MarchandiseEntity;
 
 @Transactional
 public interface MarchandiseRepository extends JpaRepository<MarchandiseEntity, Long>{

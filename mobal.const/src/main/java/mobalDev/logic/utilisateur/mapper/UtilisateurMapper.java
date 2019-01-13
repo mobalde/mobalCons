@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
-import mobalDev.model.Role;
-import mobalDev.model.User;
+import mobalDev.model.utilisateur.Role;
+import mobalDev.model.utilisateur.User;
 import mobalDev.repo.roleRepo.RoleRepository;
 
 @Component

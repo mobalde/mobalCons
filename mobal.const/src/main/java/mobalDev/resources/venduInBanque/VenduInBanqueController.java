@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mobalDev.General.AuthorisationUser;
 import mobalDev.logic.venduInBanque.GestionVenduInBanque;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
+import mobalDev.model.produit.LibelleProduitEnum;
 
 @RestController
 @RequestMapping(path="/mobalc",
@@ -28,7 +29,7 @@ public class VenduInBanqueController {
 	
 	@PreAuthorize(AuthorisationUser.PDG)
 	@RequestMapping(path = "/all/notVenduInBanque/{libelleProduit}", method = RequestMethod.GET)
-	public List<VenduInBanqueDto> getListeVenteNonComptabilise(@PathVariable("libelleProduit") String libelleProduit){
+	public List<VenduInBanqueDto> getListeVenteNonComptabilise(@PathVariable("libelleProduit") LibelleProduitEnum libelleProduit){
 		
 		return this.gestionVenduInBanque.listeDeVenteProduitNonDeposer(libelleProduit);
 	}

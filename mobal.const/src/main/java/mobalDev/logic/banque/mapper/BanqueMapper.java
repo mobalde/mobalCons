@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.banque.dto.BanqueDto;
-import mobalDev.model.BanqueEntity;
+import mobalDev.model.banque.BanqueEntity;
 
 @Component
 public class BanqueMapper implements SourceDestinationMapper<BanqueEntity,BanqueDto>{

@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.utilisateur;
 
 public enum RoleUtilisateurEnum {
 	

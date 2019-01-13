@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mobalDev.General.AuthorisationUser;
 import mobalDev.logic.produit.GestionProduit;
+import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
 
 @RestController
@@ -41,7 +42,6 @@ public class ProduitController {
 		return this.gestionProduit.getAllProduit();
 	}
 	
-	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/produit/quanitite/{libelle}", method = RequestMethod.GET)
 	public int getQuantiteCommande(@PathVariable("libelle") String libelle){
@@ -52,6 +52,12 @@ public class ProduitController {
 	@RequestMapping(path = "/produit/{libelle}", method = RequestMethod.GET)
 	public List<ProduitDto> getProduit(@PathVariable("libelle") String libelle){
 		return this.gestionProduit.getProduit(libelle);
+	}
+	
+	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
+	@RequestMapping(path = "/produit/type/{type}", method = RequestMethod.GET)
+	public ProduitDto getProduitWithType(@PathVariable MarqueProduitEnum type){
+		return this.gestionProduit.getProduit(type);
 	}
 
 }

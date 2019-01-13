@@ -1,0 +1,1 @@
+ALTER TABLE vendu add column is_comptabiliser boolean default false;

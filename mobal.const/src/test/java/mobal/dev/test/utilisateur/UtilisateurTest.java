@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
-import mobalDev.model.RoleUtilisateurEnum;
+import mobalDev.model.utilisateur.RoleUtilisateurEnum;
 import mobalDev.resources.utilisateur.UtilisateurController;
 
 public class UtilisateurTest extends ConfigTest{

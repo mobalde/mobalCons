@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import mobalDev.logic.venduInBanque.GestionVenduInBanque;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 import mobalDev.logic.venduInBanque.mapper.VenduInBanqueMapper;
-import mobalDev.model.VenduInBanqueEntity;
+import mobalDev.model.produit.LibelleProduitEnum;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
 
 /**
@@ -34,7 +35,7 @@ public class VenduInBanqueImpl implements GestionVenduInBanque{
 	private VenduInBanqueMapper venduInBanqueMapper;
 
 	@Override
-	public List<VenduInBanqueDto> listeDeVenteProduitNonDeposer(String libelleProduit) {
+	public List<VenduInBanqueDto> listeDeVenteProduitNonDeposer(LibelleProduitEnum libelleProduit) {
 		
 		List<VenduInBanqueEntity> listVenduInBanque = this.venduInBanqueRepo.findAllNotVenduInBanqueForProduit(libelleProduit);
 		List<VenduInBanqueDto> listVenduDto = listVenduInBanque.stream()

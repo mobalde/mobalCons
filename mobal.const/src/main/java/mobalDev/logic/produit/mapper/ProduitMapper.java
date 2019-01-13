@@ -8,8 +8,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.produit.dto.ProduitDto;
-import mobalDev.model.HistoriqueProduitEntity;
-import mobalDev.model.ProduitEntity;
+import mobalDev.model.produit.HistoriqueProduitEntity;
+import mobalDev.model.produit.ProduitEntity;
 
 @Component
 public class ProduitMapper implements SourceDestinationMapper<ProduitEntity, ProduitDto>{

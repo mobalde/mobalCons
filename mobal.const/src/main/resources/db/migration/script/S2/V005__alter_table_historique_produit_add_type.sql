@@ -1,1 +1,0 @@
-ALTER TABLE historique_produit ADD COLUMN type varchar(50);

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import mobalDev.model.User;
+import mobalDev.model.utilisateur.User;
 
 public interface UtilisateurRepository extends JpaRepository<User, Long>{
 

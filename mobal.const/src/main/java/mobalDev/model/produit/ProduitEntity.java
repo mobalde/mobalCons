@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.produit;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import mobalDev.logic.produit.dto.TypeProduitEnum;
+import mobalDev.logic.produit.dto.MarqueProduitEnum;
+import mobalDev.model.AbstractEntity;
+import mobalDev.model.marchandise.MarchandiseEntity;
+import mobalDev.model.vendu.VenduEntity;
 
 @Entity
 @Table(name="produit")
@@ -29,14 +32,18 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	private int quantiteCommande;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private TypeProduitEnum type;
+	@Column(name="marque", nullable = false)
+	private MarqueProduitEnum type;
 	
 	@OneToMany(mappedBy = "produit")
 	private Set<VenduEntity> vendu;
 	
 	@OneToMany(mappedBy = "produit")
 	private Set<MarchandiseEntity> marchandise;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="libelle_enum", nullable=false)
+	private LibelleProduitEnum libelleEnum;
 	
 	public ProduitEntity() {
 		super();
@@ -74,12 +81,20 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 		this.quantiteCommande = quantiteCommande;
 	}
 
-	public TypeProduitEnum getType() {
+	public MarqueProduitEnum getType() {
 		return type;
 	}
 
-	public void setType(TypeProduitEnum type) {
+	public void setType(MarqueProduitEnum type) {
 		this.type = type;
+	}
+
+	public LibelleProduitEnum getLibelleEnum() {
+		return libelleEnum;
+	}
+
+	public void setLibelleEnum(LibelleProduitEnum libelleEnum) {
+		this.libelleEnum = libelleEnum;
 	}
 	
 }

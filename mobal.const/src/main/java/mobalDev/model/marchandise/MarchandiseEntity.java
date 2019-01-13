@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.marchandise;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import mobalDev.model.AbstractEntity;
+import mobalDev.model.produit.ProduitEntity;
 
 @Entity
 @Table(name="marchandise")
@@ -32,7 +35,7 @@ public class MarchandiseEntity extends AbstractEntity implements Serializable{
 	@Column(name="total_marchandise_restant", nullable=false)
 	private int totalSacRestant;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="produit_id", referencedColumnName="id")
 	private ProduitEntity produit;
 	

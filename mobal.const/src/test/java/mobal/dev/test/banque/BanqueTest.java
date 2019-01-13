@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 
 import mobal.dev.test.config.ConfigTest;
-import mobal.dev.test.config.LibelleProduitEnum;
 import mobalDev.logic.banque.dto.BanqueDto;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
+import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.resources.banque.BanqueController;
 import mobalDev.resources.venduInBanque.VenduInBanqueController;
 
@@ -38,7 +38,7 @@ public class BanqueTest extends ConfigTest{
 	public void registration_test() {
 		
 		boolean result = false;
-		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.BASKET_BALL.getLibelle());
+		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.BASKET_BALL);
 		if(!list.isEmpty() && list != null) {
 			list.get(0).setDepotBanque(true);
 			setBanqueDto(dto, list.get(0));

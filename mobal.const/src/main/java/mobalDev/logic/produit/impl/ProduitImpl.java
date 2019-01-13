@@ -12,10 +12,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import mobalDev.logic.produit.GestionProduit;
+import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
-import mobalDev.logic.produit.dto.TypeProduitEnum;
 import mobalDev.logic.produit.mapper.ProduitMapper;
-import mobalDev.model.ProduitEntity;
+import mobalDev.model.produit.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
 import mobalDev.repo.produitRepo.ProduitRepository;
 
@@ -81,8 +81,6 @@ public class ProduitImpl implements GestionProduit{
 		return dto;
 	}
 	
-	
-
 	@Override
 	public List<ProduitDto> getAllProduit() {
 		
@@ -97,7 +95,7 @@ public class ProduitImpl implements GestionProduit{
 	}
 
 	@Override
-	public ProduitDto getProduit(TypeProduitEnum type) {
+	public ProduitDto getProduit(MarqueProduitEnum type) {
 		ProduitEntity entity = this.produitRepo.findByType(type);
 		ProduitDto dto = new ProduitDto();
 		if(entity != null) {
@@ -107,7 +105,7 @@ public class ProduitImpl implements GestionProduit{
 	}
 
 	@Override
-	public int getQuantiteCommande(TypeProduitEnum type) {
+	public int getQuantiteCommande(MarqueProduitEnum type) {
 		ProduitDto dto = this.getProduit(type);
 		return dto != null ? dto.getQuantiteCommande() : 0;
 	}

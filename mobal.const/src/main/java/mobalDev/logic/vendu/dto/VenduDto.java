@@ -2,18 +2,15 @@ package mobalDev.logic.vendu.dto;
 
 import java.time.LocalDate;
 
+import mobalDev.logic.produit.dto.ProduitDto;
+
 public class VenduDto {
 	private LocalDate dateVente;
 	private int quantite;
 	private Double prixUnitaire;
 	private Double total;
-	private Long idProduit;
-	public LocalDate getdateVente() {
-		return this.dateVente;
-	}
-	public void setdateVente(LocalDate dateVente) {
-		this.dateVente = dateVente;
-	}
+	private ProduitDto produit;
+	
 	public int getQuantite() {
 		return quantite;
 	}
@@ -32,11 +29,19 @@ public class VenduDto {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public Long getIdProduit() {
-		return idProduit;
+	public ProduitDto getProduit() {
+		return produit;
 	}
-	public void setIdProduit(Long idProduit) {
-		this.idProduit = idProduit;
+	public void setProduit(ProduitDto produit) {
+		this.produit = produit;
 	}
-	
+	public LocalDate getDateVente() {
+		return dateVente;
+	}
+	public void setDateVente(LocalDate dateVente) {
+		this.dateVente = dateVente;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 }

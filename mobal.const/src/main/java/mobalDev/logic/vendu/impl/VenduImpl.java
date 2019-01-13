@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import mobalDev.logic.vendu.GestionVente;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.logic.vendu.mapper.VenduMapper;
-import mobalDev.model.ProduitEntity;
-import mobalDev.model.VenduEntity;
-import mobalDev.model.VenduInBanqueEntity;
+import mobalDev.model.produit.ProduitEntity;
+import mobalDev.model.vendu.VenduEntity;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 import mobalDev.repo.produitRepo.ProduitRepository;
 import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
 import mobalDev.repo.venduRepo.VenduRepository;
@@ -44,11 +44,11 @@ public class VenduImpl implements GestionVente{
 		if(list != null && !list.isEmpty()){
 			VenduInBanqueEntity venduInB = new VenduInBanqueEntity();
 			venduInB.setDepotBanque(false);
-			venduInB.setDebutSemaine(list.get(0).getdateVente());
-			venduInB.setFinSemaine(list.get(list.size()-1).getdateVente());
+			venduInB.setDebutSemaine(list.get(0).getDateVente());
+			venduInB.setFinSemaine(list.get(list.size()-1).getDateVente());
 			venduInBaRepo.saveAndFlush(venduInB);
 			for(VenduDto venduDto : list) {
-				Optional<ProduitEntity> produitEnt = this.produitRepo.findById(venduDto.getIdProduit());
+				Optional<ProduitEntity> produitEnt = this.produitRepo.findById(venduDto.getProduit().getId());
 				if(produitEnt.isPresent()) {
 					VenduEntity venduE = venduMapper.convertDtoToEntity(venduDto);
 					venduE.setId(null);

@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.banque;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import mobalDev.model.AbstractEntity;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 
 @Entity
 @Table(name="banque")

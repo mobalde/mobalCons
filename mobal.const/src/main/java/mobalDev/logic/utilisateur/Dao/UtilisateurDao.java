@@ -1,6 +1,6 @@
 package mobalDev.logic.utilisateur.Dao;
 
-import mobalDev.model.RoleUtilisateurEnum;
+import mobalDev.model.utilisateur.RoleUtilisateurEnum;
 
 public class UtilisateurDao {
 

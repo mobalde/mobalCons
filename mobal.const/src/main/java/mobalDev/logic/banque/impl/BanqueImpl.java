@@ -10,8 +10,8 @@ import mobalDev.logic.banque.GestionBanque;
 import mobalDev.logic.banque.mapper.BanqueMapper;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
 import mobalDev.logic.venduInBanque.mapper.VenduInBanqueMapper;
-import mobalDev.model.BanqueEntity;
-import mobalDev.model.VenduInBanqueEntity;
+import mobalDev.model.banque.BanqueEntity;
+import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 import mobalDev.repo.banqueRepo.BanqueRepository;
 import mobalDev.repo.venduInBanqueRepo.VenduInBanqueRepository;
 

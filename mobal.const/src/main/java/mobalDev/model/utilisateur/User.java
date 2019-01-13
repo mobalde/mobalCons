@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.utilisateur;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import mobalDev.model.AbstractEntity;
 
 @Entity
 @Table(name="users")

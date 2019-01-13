@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 
 import mobal.dev.test.config.ConfigTest;
-import mobal.dev.test.config.LibelleProduitEnum;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
+import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.resources.venduInBanque.VenduInBanqueController;
 
 public class VenduInBanqueTest extends ConfigTest{
@@ -31,7 +31,7 @@ public class VenduInBanqueTest extends ConfigTest{
 	@Test
 	public void getListeVenteNonComptabilise_test() {
 		
-		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.BASKET_BALL.getLibelle());
+		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.BASKET_BALL);
 		
 		assertNotNull(list);
 		assertTrue(list.size() == 1);

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import mobalDev.logic.SourceDestinationMapper;
 import mobalDev.logic.marchandise.dto.MarchandiseDto;
-import mobalDev.model.MarchandiseEntity;
+import mobalDev.model.marchandise.MarchandiseEntity;
 
 @Component
 public class MarchandisMapper implements SourceDestinationMapper<MarchandiseEntity, MarchandiseDto>{

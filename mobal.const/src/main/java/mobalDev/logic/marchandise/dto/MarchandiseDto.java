@@ -2,16 +2,24 @@ package mobalDev.logic.marchandise.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import mobalDev.logic.produit.dto.ProduitDto;
+
 public class MarchandiseDto{
 	
-	private LocalDate dateDebut;
-	private LocalDate dateFin;
-	private int nbSacVendu;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private LocalDate dateDebut = LocalDate.now();
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private LocalDate dateFin = LocalDate.now().plusDays(7);
+	private int nbSacVendu = 0;
 	private int nbSacAnterieur = 0;
-	private int totalSacVendu;
+	private int totalSacVendu = 0;
 	private int totalSacMarchandise;
-	private int totalSacRestant;
-	private Long idProduit;
+	private int totalSacRestant = 0;
+	private ProduitDto produitDto;
 	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
@@ -54,10 +62,10 @@ public class MarchandiseDto{
 	public void setTotalSacRestant(int totalSacRestant) {
 		this.totalSacRestant = totalSacRestant;
 	}
-	public Long getIdProduit() {
-		return idProduit;
+	public ProduitDto getProduitDto() {
+		return produitDto;
 	}
-	public void setIdProduit(Long idProduit) {
-		this.idProduit = idProduit;
+	public void setProduitDto(ProduitDto produitDto) {
+		this.produitDto = produitDto;
 	}
 }

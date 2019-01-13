@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import mobalDev.model.BanqueEntity;
+import mobalDev.model.banque.BanqueEntity;
 
 public interface BanqueRepository extends JpaRepository<BanqueEntity, Long>{
 	

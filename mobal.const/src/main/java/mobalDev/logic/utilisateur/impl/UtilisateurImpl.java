@@ -21,9 +21,9 @@ import mobalDev.logic.utilisateur.GestionUtilisateur;
 import mobalDev.logic.utilisateur.Dao.UtilisateurDao;
 import mobalDev.logic.utilisateur.dto.UtilisateurDto;
 import mobalDev.logic.utilisateur.mapper.UtilisateurMapper;
-import mobalDev.model.Role;
-import mobalDev.model.RoleUtilisateurEnum;
-import mobalDev.model.User;
+import mobalDev.model.utilisateur.Role;
+import mobalDev.model.utilisateur.RoleUtilisateurEnum;
+import mobalDev.model.utilisateur.User;
 import mobalDev.repo.roleRepo.RoleRepository;
 import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
 

@@ -1,4 +1,4 @@
-package mobalDev.model;
+package mobalDev.model.utilisateur;
 
 import java.util.Collection;
 
@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import mobalDev.model.AbstractEntity;
 
 @Entity
 @Table(name="role")

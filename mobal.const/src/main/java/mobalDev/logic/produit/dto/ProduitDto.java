@@ -1,11 +1,14 @@
 package mobalDev.logic.produit.dto;
 
+import mobalDev.model.produit.LibelleProduitEnum;
+
 public class ProduitDto {
 
 	private Long id;
 	private String libelle;
 	private int quantiteCommande;
-	private TypeProduitEnum type;
+	private MarqueProduitEnum type;
+	private LibelleProduitEnum libelleEnum;
 	public Long getId() {
 		return id;
 	}
@@ -24,10 +27,16 @@ public class ProduitDto {
 	public void setQuantiteCommande(int quantiteCommande) {
 		this.quantiteCommande = quantiteCommande;
 	}
-	public TypeProduitEnum getType() {
+	public MarqueProduitEnum getType() {
 		return type;
 	}
-	public void setType(TypeProduitEnum type) {
+	public void setType(MarqueProduitEnum type) {
 		this.type = type;
+	}
+	public LibelleProduitEnum getLibelleEnum() {
+		return libelleEnum;
+	}
+	public void setLibelleEnum(LibelleProduitEnum libelleEnum) {
+		this.libelleEnum = libelleEnum;
 	}
 }

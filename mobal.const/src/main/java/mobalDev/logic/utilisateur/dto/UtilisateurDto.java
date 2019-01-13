@@ -2,7 +2,7 @@ package mobalDev.logic.utilisateur.dto;
 
 import java.util.List;
 
-import mobalDev.model.RoleUtilisateurEnum;
+import mobalDev.model.utilisateur.RoleUtilisateurEnum;
 
 public class UtilisateurDto {
 	
