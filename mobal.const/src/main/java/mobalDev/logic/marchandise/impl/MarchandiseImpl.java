@@ -75,8 +75,8 @@ public class MarchandiseImpl implements GestionMarchandise{
 	@Override
 	public void nombreDeSacVendu(MarchandiseDto dto, Long id) {
 		
-		int total = this.venduRepo.calculNombreDeSacVendu(id);
-		dto.setNbSacVendu(total);
+		Integer total = this.venduRepo.calculNombreDeSacVendu(id);
+		dto.setNbSacVendu(total != null ? total.intValue() : 0);
 		dto.setNbSacAnterieur(this.getNbSacAnterieur());
 	}
 }

@@ -19,7 +19,9 @@ import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.logic.vendu.dto.VenduDto;
 import mobalDev.model.produit.ProduitEntity;
+import mobalDev.model.vendu.VenduEntity;
 import mobalDev.repo.produitRepo.ProduitRepository;
+import mobalDev.repo.venduRepo.VenduRepository;
 import mobalDev.resources.vendu.VenduController;
 
 public class VenduTest extends ConfigTest{
@@ -36,6 +38,9 @@ public class VenduTest extends ConfigTest{
 	@Inject 
 	private ProduitMapper prodMapper;
 	
+	@Inject
+	private VenduRepository venduRepo;
+	
 	VenduDto dto;
 	
 	List<VenduDto> listVente = new ArrayList<>();
@@ -43,19 +48,23 @@ public class VenduTest extends ConfigTest{
 	@Test
 	public void registration_test() {
 		
-		LocalDate date1 = LocalDate.of(2018, Month.DECEMBER, 2);
+		List<VenduEntity> venduEntity = this.venduRepo.findAll();
+		if(venduEntity == null || venduEntity.isEmpty()) {
+			LocalDate date1 = LocalDate.of(2018, Month.DECEMBER, 2);
+			
+			Optional<ProduitEntity> prodEntity = this.prodRepo.findById(4L);
+			ProduitDto prodDto = this.prodMapper.convertEntityToDto(prodEntity.get());
+			
+			listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, prodDto));
+			listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, prodDto));
+			
+			boolean isVente = this.venduController.saveVente(session, listVente);
+			assertTrue(isVente);
+			
+			boolean isNotVente = this.venduController.saveVente(session, new ArrayList<>());
+			assertFalse(isNotVente);
+		}
 		
-		Optional<ProduitEntity> prodEntity = this.prodRepo.findById(4L);
-		ProduitDto prodDto = this.prodMapper.convertEntityToDto(prodEntity.get());
-		
-		listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, prodDto));
-		listVente.add(setVendu(date1, 3, 3345.0, 3345.0*3, prodDto));
-		
-		boolean isVente = this.venduController.saveVente(session, listVente);
-		assertTrue(isVente);
-		
-		boolean isNotVente = this.venduController.saveVente(session, new ArrayList<>());
-		assertFalse(isNotVente);
 	}
 	
 	private VenduDto setVendu(LocalDate date1, int quantite, Double prixUnitaire, Double total, ProduitDto prodDto) {

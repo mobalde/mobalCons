@@ -14,7 +14,7 @@ public interface VenduRepository extends JpaRepository<VenduEntity, Long>{
 				 + " INNER JOIN v.produit p	"
 				 + " WHERE p.id = :id and v.isComptabiliser = false GROUP BY p.id" //
 		  )
-	int calculNombreDeSacVendu(@Param("id") Long id);
+	Integer calculNombreDeSacVendu(@Param("id") Long id);
 	
 	@Query(value = " SELECT v FROM VenduEntity v " //
 				 + " INNER JOIN v.produit p " //

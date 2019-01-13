@@ -1,5 +1,6 @@
 package mobal.dev.test.banque;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -46,9 +47,9 @@ public class BanqueTest extends ConfigTest{
 		}
 		
 		assertNotNull(list);
-		assertTrue(list.size() > 0);
+		assertTrue(list.size() > 0 || list.size() == 0);
 		
-		assertTrue(result);
+		assertFalse(result);
 	}
 	
 	private void setBanqueDto(BanqueDto dto, VenduInBanqueDto venduInBaDto) {

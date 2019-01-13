@@ -29,25 +29,25 @@ public class MarchandiseController {
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/ajout/marchandise", method = RequestMethod.POST)
-	private MarchandiseDto marchandiseAdd(HttpSession session, @RequestBody MarchandiseDto dto){
+	public MarchandiseDto marchandiseAdd(HttpSession session, @RequestBody MarchandiseDto dto){
 		return this.gestionMarvhandise.registration(dto);
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/searchOne", method = RequestMethod.GET)
-	private MarchandiseDto getLastMarchandise(){
+	public MarchandiseDto getLastMarchandise(){
 		return this.gestionMarvhandise.getLastMarchandise();
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/sacAnterieur", method = RequestMethod.GET)
-	private int getNbSacAnterieur(){
+	public int getNbSacAnterieur(){
 		return this.gestionMarvhandise.getNbSacAnterieur();
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
 	@RequestMapping(path = "/nombreSacVendu/{idProduit}", method = RequestMethod.GET)
-	private MarchandiseDto nombreDeSacVendu(@PathVariable Long idProduit) {
+	public MarchandiseDto nombreDeSacVendu(@PathVariable Long idProduit) {
 		MarchandiseDto dto = new MarchandiseDto();
 		this.gestionMarvhandise.nombreDeSacVendu(dto, idProduit);
 		return dto;
