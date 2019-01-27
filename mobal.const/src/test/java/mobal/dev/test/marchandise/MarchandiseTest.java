@@ -36,7 +36,7 @@ public class MarchandiseTest extends ConfigTest{
 	@Test
 	public void registration_test() {
 		
-		Optional<ProduitEntity> entity = this.produitRepo.findById(4L);
+		Optional<ProduitEntity> entity = this.produitRepo.findById(2L);
 		if(entity.isPresent()) {
 			this.produitEntity = entity.get();
 			ProduitDto produitDto = this.produitMapper.convertEntityToDto(produitEntity);

@@ -45,6 +45,10 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 	@Column(name="libelle_enum", nullable=false)
 	private LibelleProduitEnum libelleEnum;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name="taille", nullable=false)
+	private TailleProduitEnum tailleProduit;
+	
 	public ProduitEntity() {
 		super();
 	}
@@ -95,6 +99,14 @@ public class ProduitEntity extends AbstractEntity implements Serializable{
 
 	public void setLibelleEnum(LibelleProduitEnum libelleEnum) {
 		this.libelleEnum = libelleEnum;
+	}
+
+	public TailleProduitEnum getTailleProduit() {
+		return tailleProduit;
+	}
+
+	public void setTailleProduit(TailleProduitEnum tailleProduit) {
+		this.tailleProduit = tailleProduit;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package mobalDev.logic.produit.dto;
 
 import mobalDev.model.produit.LibelleProduitEnum;
+import mobalDev.model.produit.TailleProduitEnum;
 
 public class ProduitDto {
 
@@ -9,6 +10,8 @@ public class ProduitDto {
 	private int quantiteCommande;
 	private MarqueProduitEnum type;
 	private LibelleProduitEnum libelleEnum;
+	private TailleProduitEnum tailleProduitEnum;
+	private String taille;
 	public Long getId() {
 		return id;
 	}
@@ -38,5 +41,17 @@ public class ProduitDto {
 	}
 	public void setLibelleEnum(LibelleProduitEnum libelleEnum) {
 		this.libelleEnum = libelleEnum;
+	}
+	public TailleProduitEnum getTailleProduitEnum() {
+		return tailleProduitEnum;
+	}
+	public void setTailleProduitEnum(TailleProduitEnum tailleProduitEnum) {
+		this.tailleProduitEnum = tailleProduitEnum;
+	}
+	public String getTaille() {
+		return taille;
+	}
+	public void setTaille(String taille) {
+		this.taille = taille;
 	}
 }

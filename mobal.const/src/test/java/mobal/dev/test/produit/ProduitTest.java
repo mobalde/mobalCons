@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
+import mobalDev.model.produit.LibelleProduitEnum;
+import mobalDev.model.produit.TailleProduitEnum;
 import mobalDev.resources.produit.ProduitController;
 
 public class ProduitTest extends ConfigTest{
@@ -35,42 +37,48 @@ public class ProduitTest extends ConfigTest{
 		// Ajout produit sans typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
+		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(1000);
 		boolean result_1 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit avec type
 		dto = new ProduitDto();
 		dto.setLibelle("basket ball");
+		dto.setLibelleEnum(LibelleProduitEnum.BASKET_BALL);
 		dto.setQuantiteCommande(400);
 		dto.setType(MarqueProduitEnum.AUTRE);
+		dto.setTailleProduitEnum(TailleProduitEnum.QUARANTE_DEUX_CINQ);
 		boolean result_2 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
+		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(1000);
 		dto.setType(MarqueProduitEnum.GI);
+		dto.setTailleProduitEnum(TailleProduitEnum.QUARANTE_DEUX_CINQ);
 		boolean result_3 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
+		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(1000);
-		dto.setType(MarqueProduitEnum.GI);
+		dto.setType(MarqueProduitEnum.DIAMOND);
+		dto.setTailleProduitEnum(TailleProduitEnum.TRENTE_DEUX_CINQ);
 		boolean result_4 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit sans typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
+		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(700);
 		dto.setType(MarqueProduitEnum.GI);
+		dto.setTailleProduitEnum(TailleProduitEnum.TRENTE_DEUX_CINQ);
 		boolean result_5 = this.produitController.produitAdd(session, dto);
 		
 		assertFalse(result_1);
-		assertFalse(result_2);
-		assertTrue(result_3);
-		assertFalse(result_4);
-		assertTrue(result_5);
+		assertFalse(result_5);
 		
 	}
 	

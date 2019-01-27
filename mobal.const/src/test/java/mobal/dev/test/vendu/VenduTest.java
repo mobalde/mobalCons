@@ -52,7 +52,7 @@ public class VenduTest extends ConfigTest{
 		if(venduEntity == null || venduEntity.isEmpty()) {
 			LocalDate date1 = LocalDate.of(2018, Month.DECEMBER, 2);
 			
-			Optional<ProduitEntity> prodEntity = this.prodRepo.findById(4L);
+			Optional<ProduitEntity> prodEntity = this.prodRepo.findById(2L);
 			ProduitDto prodDto = this.prodMapper.convertEntityToDto(prodEntity.get());
 			
 			listVente.add(setVendu(date1, 2, 2345.0, 2345.0*2, prodDto));
