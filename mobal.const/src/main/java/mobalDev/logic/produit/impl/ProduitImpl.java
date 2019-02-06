@@ -42,7 +42,7 @@ public class ProduitImpl implements GestionProduit{
 			ProduitEntity entity = this.produitRepo.findByType(dto.getType());
 			if(entity != null) {
 				// update si dto.quantite != entity.quantite
-				if(entity.getQuantiteCommande() != dto.getQuantiteCommande() && !entity.getTailleProduit().equals(dto.getTailleProduitEnum())) {
+				if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
 					this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(entity)); // save produit in table historique
 					entity.setQuantiteCommande(dto.getQuantiteCommande());
 					this.produitRepo.saveAndFlush(entity);

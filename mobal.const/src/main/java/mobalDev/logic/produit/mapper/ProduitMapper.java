@@ -19,9 +19,7 @@ public class ProduitMapper implements SourceDestinationMapper<ProduitEntity, Pro
 
 	@Override
 	public ProduitDto convertEntityToDto(ProduitEntity entity) {
-		ProduitDto dto = this.modelMaper.map(entity, ProduitDto.class);
-		dto.setTaille(entity.getTailleProduit().getLibelle());
-		return dto;
+		return this.modelMaper.map(entity, ProduitDto.class);
 	}
 
 	@Override

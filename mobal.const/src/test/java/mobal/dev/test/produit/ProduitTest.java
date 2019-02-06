@@ -16,7 +16,6 @@ import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.model.produit.LibelleProduitEnum;
-import mobalDev.model.produit.TailleProduitEnum;
 import mobalDev.resources.produit.ProduitController;
 
 public class ProduitTest extends ConfigTest{
@@ -47,7 +46,6 @@ public class ProduitTest extends ConfigTest{
 		dto.setLibelleEnum(LibelleProduitEnum.BASKET_BALL);
 		dto.setQuantiteCommande(400);
 		dto.setType(MarqueProduitEnum.AUTRE);
-		dto.setTailleProduitEnum(TailleProduitEnum.QUARANTE_DEUX_CINQ);
 		boolean result_2 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
@@ -55,8 +53,7 @@ public class ProduitTest extends ConfigTest{
 		dto.setLibelle("ciment");
 		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(1000);
-		dto.setType(MarqueProduitEnum.GI);
-		dto.setTailleProduitEnum(TailleProduitEnum.QUARANTE_DEUX_CINQ);
+		dto.setType(MarqueProduitEnum.GI_32_5);
 		boolean result_3 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit avec typeProduit
@@ -64,8 +61,7 @@ public class ProduitTest extends ConfigTest{
 		dto.setLibelle("ciment");
 		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(1000);
-		dto.setType(MarqueProduitEnum.DIAMOND);
-		dto.setTailleProduitEnum(TailleProduitEnum.TRENTE_DEUX_CINQ);
+		dto.setType(MarqueProduitEnum.DIAMOND_32_5);
 		boolean result_4 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit sans typeProduit
@@ -73,9 +69,16 @@ public class ProduitTest extends ConfigTest{
 		dto.setLibelle("ciment");
 		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(700);
-		dto.setType(MarqueProduitEnum.GI);
-		dto.setTailleProduitEnum(TailleProduitEnum.TRENTE_DEUX_CINQ);
+		dto.setType(MarqueProduitEnum.GI_42_5);
 		boolean result_5 = this.produitController.produitAdd(session, dto);
+		
+		// Ajout produit avec typeProduit
+		dto = new ProduitDto();
+		dto.setLibelle("ciment");
+		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
+		dto.setQuantiteCommande(1000);
+		dto.setType(MarqueProduitEnum.DIAMOND_42_5);
+		boolean result_6 = this.produitController.produitAdd(session, dto);
 		
 		assertFalse(result_1);
 		assertFalse(result_5);
@@ -102,7 +105,7 @@ public class ProduitTest extends ConfigTest{
 		@SuppressWarnings("unused")
 		int quantite = this.produitController.getQuantiteCommande("ciment");
 		List<ProduitDto> dto = this.produitController.getProduit("ciment");
-		ProduitDto Proddto = this.produitController.getProduitWithType(MarqueProduitEnum.GI);
+		ProduitDto Proddto = this.produitController.getProduitWithType(MarqueProduitEnum.GI_32_5);
 		
 		assertNotNull(dto);
 		assertNotNull(Proddto);
