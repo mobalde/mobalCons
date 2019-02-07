@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
+@PropertySource("classpath:application-test.properties")
 public class MobalConstApplication {
 
 	public static void main(String[] args) {

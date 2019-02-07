@@ -20,14 +20,14 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 
 	private static final long serialVersionUID = 1455722610428547992L;
 	
-	@Column(name="date_depot", nullable=false)
-	private LocalDate dateDepot;
-	@Column(name="agence_de_depot")
-	private String agenceDepot;
+	@Column(name="date_operation", nullable=false)
+	private LocalDate dateOperation;
+	@Column(name="agence")
+	private String agence;
 	@Column(name="numero_ticket", nullable=false)
 	private String numeroTicket;
-	@Column(name="argent_depose", nullable=false)
-	private Double argentDepose;
+	@Column(name="somme", nullable=false)
+	private Double somme;
 	@Column(name="solde_anterieur", nullable=false)
 	private Double soldeAnterieur;
 	@Column(name="total", nullable=false)
@@ -36,25 +36,28 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	private boolean isDepot;
 	@Column(name="is_retrait")
 	private boolean isRetrait;
+	@Column(name="is_virement")
+	private boolean isVirement;
+	private String motif;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
 	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
 	private VenduInBanqueEntity venduInBanque;
 
-	public LocalDate getDateDepot() {
-		return dateDepot;
+	public LocalDate getDateOperation() {
+		return dateOperation;
 	}
 
-	public void setDateDepot(LocalDate dateDepot) {
-		this.dateDepot = dateDepot;
+	public void setDateOperation(LocalDate dateDepot) {
+		this.dateOperation = dateDepot;
 	}
 
-	public String getAgenceDepot() {
-		return agenceDepot;
+	public String getAgence() {
+		return agence;
 	}
 
-	public void setAgenceDepot(String agenceDepot) {
-		this.agenceDepot = agenceDepot;
+	public void setAgence(String agenceDepot) {
+		this.agence = agenceDepot;
 	}
 
 	public String getNumeroTicket() {
@@ -65,12 +68,12 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 		this.numeroTicket = numeroTicket;
 	}
 
-	public Double getArgentDepose() {
-		return argentDepose;
+	public Double getSomme() {
+		return somme;
 	}
 
-	public void setArgentDepose(Double argentDepose) {
-		this.argentDepose = argentDepose;
+	public void setSomme(Double argentDepose) {
+		this.somme = argentDepose;
 	}
 
 	public Double getSoldeAnterieur() {
@@ -112,5 +115,20 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	public void setVenduInBanque(VenduInBanqueEntity venduInBanque) {
 		this.venduInBanque = venduInBanque;
 	}
-	
+
+	public boolean isVirement() {
+		return isVirement;
+	}
+
+	public void setVirement(boolean isVirement) {
+		this.isVirement = isVirement;
+	}
+
+	public String getMotif() {
+		return motif;
+	}
+
+	public void setMotif(String motif) {
+		this.motif = motif;
+	}
 }
