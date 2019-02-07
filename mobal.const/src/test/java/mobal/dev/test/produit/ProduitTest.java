@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import mobal.dev.test.config.ConfigTest;
-import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.model.produit.LibelleProduitEnum;
+import mobalDev.model.produit.MarqueProduitEnum;
 import mobalDev.resources.produit.ProduitController;
 
 public class ProduitTest extends ConfigTest{

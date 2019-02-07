@@ -1,6 +1,7 @@
 package mobalDev.logic.produit.dto;
 
 import mobalDev.model.produit.LibelleProduitEnum;
+import mobalDev.model.produit.MarqueProduitEnum;
 
 public class ProduitDto {
 

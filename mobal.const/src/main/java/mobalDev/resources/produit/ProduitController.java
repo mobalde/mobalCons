@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mobalDev.General.AuthorisationUser;
 import mobalDev.logic.produit.GestionProduit;
-import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
+import mobalDev.model.produit.MarqueProduitEnum;
 
 @RestController
 @RequestMapping(path="/mobalc",

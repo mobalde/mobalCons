@@ -12,9 +12,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import mobalDev.logic.produit.GestionProduit;
-import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
+import mobalDev.model.produit.MarqueProduitEnum;
 import mobalDev.model.produit.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
 import mobalDev.repo.produitRepo.ProduitRepository;

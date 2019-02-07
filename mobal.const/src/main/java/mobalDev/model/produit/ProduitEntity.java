@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.model.AbstractEntity;
 import mobalDev.model.marchandise.MarchandiseEntity;
 import mobalDev.model.vendu.VenduEntity;

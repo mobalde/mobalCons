@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import mobalDev.logic.produit.dto.MarqueProduitEnum;
 import mobalDev.model.AbstractEntity;
 
 @Entity

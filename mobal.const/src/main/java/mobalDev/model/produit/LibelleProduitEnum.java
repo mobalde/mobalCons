@@ -1,5 +1,8 @@
 package mobalDev.model.produit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum LibelleProduitEnum {
 	CIMENT("ciment"), //
 	BASKET_BALL("basket ball"), //
@@ -18,5 +21,14 @@ public enum LibelleProduitEnum {
 	 */
 	public String getLibelle() {
 		return libelle;
+	}
+	
+	public static List<String> getLibelles(){
+		
+		List<String> libelles = new ArrayList<String>();
+		for(LibelleProduitEnum libelleEnum : LibelleProduitEnum.values()) {
+			libelles.add(libelleEnum.getLibelle());
+		}
+		return libelles;
 	}
 }
