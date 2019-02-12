@@ -5,26 +5,26 @@ import java.time.LocalDate;
 public class BanqueDto {
 
 	private Long id;
-	private LocalDate dateDepot;
-	private String agenceDepot;
+	private LocalDate dateOperation;
+	private String agence;
 	private String numeroTicket;
-	private Double argentDepose;
+	private Double somme;
 	private Double total;
 	private boolean depot;
 	private boolean retrait;
 	private Double soldeAnterieur;
 	
-	public LocalDate getDateDepot() {
-		return dateDepot;
+	public LocalDate getDateOperation() {
+		return dateOperation;
 	}
-	public void setDateDepot(LocalDate dateDepot) {
-		this.dateDepot = dateDepot;
+	public void setDateOperation(LocalDate dateDepot) {
+		this.dateOperation = dateDepot;
 	}
-	public String getAgenceDepot() {
-		return agenceDepot;
+	public String getAgence() {
+		return agence;
 	}
-	public void setAgenceDepot(String agenceDepot) {
-		this.agenceDepot = agenceDepot;
+	public void setAgence(String agenceDepot) {
+		this.agence = agenceDepot;
 	}
 	public String getNumeroTicket() {
 		return numeroTicket;
@@ -38,11 +38,11 @@ public class BanqueDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Double getArgentDepose() {
-		return argentDepose;
+	public Double getArgent() {
+		return somme;
 	}
-	public void setArgentDepose(Double argentDepose) {
-		this.argentDepose = argentDepose;
+	public void setArgent(Double argentDepose) {
+		this.somme = argentDepose;
 	}
 	public Double getTotal() {
 		return total;

@@ -53,9 +53,9 @@ public class BanqueTest extends ConfigTest{
 	}
 	
 	private void setBanqueDto(BanqueDto dto, VenduInBanqueDto venduInBaDto) {
-		dto.setAgenceDepot("Ecobank Kipé");
-		dto.setArgentDepose(14725.0);
-		dto.setDateDepot(LocalDate.now());
+		dto.setAgence("Ecobank Kipé");
+		dto.setArgent(14725.0);
+		dto.setDateOperation(LocalDate.now());
 		dto.setNumeroTicket("1234727A");
 		dto.setSoldeAnterieur(0.0);
 		dto.setTotal(14725.0);

@@ -13,4 +13,6 @@ public interface GestionProduit extends CrudGenerique<ProduitDto>{
 	public List<ProduitDto> getAllProduit();
 	public ProduitDto getProduit(MarqueProduitEnum type);
 	public int getQuantiteCommande(MarqueProduitEnum type);
+	public List<String> getLibelleAll();
+	public List<String> getMarqueAll();
 }

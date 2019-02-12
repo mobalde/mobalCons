@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
+import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.model.produit.MarqueProduitEnum;
 import mobalDev.model.produit.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
@@ -34,6 +35,10 @@ public class ProduitImpl implements GestionProduit{
 	
 	@Inject
 	private HistoriqueProduitRepository histoRepo;
+	
+	private LibelleProduitEnum libelleProduitEnum;
+	
+	private MarqueProduitEnum marqueProduitEnum;
 
 	@Override
 	public boolean registration(ProduitDto dto) {
@@ -108,6 +113,18 @@ public class ProduitImpl implements GestionProduit{
 	public int getQuantiteCommande(MarqueProduitEnum type) {
 		ProduitDto dto = this.getProduit(type);
 		return dto != null ? dto.getQuantiteCommande() : 0;
+	}
+
+	@Override
+	public List<String> getLibelleAll() {
+		
+		return this.libelleProduitEnum.getLibelles();
+	}
+
+	@Override
+	public List<String> getMarqueAll() {
+		
+		return this.marqueProduitEnum.getLibelles();
 	}
 
 }

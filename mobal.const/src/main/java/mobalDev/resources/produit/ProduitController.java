@@ -59,5 +59,17 @@ public class ProduitController {
 	public ProduitDto getProduitWithType(@PathVariable MarqueProduitEnum type){
 		return this.gestionProduit.getProduit(type);
 	}
+	
+	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
+	@RequestMapping(path = "/produit/libelle", method = RequestMethod.GET)
+	public List<String> getLibelleAll(){
+		return this.gestionProduit.getLibelleAll();
+	}
+	
+	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
+	@RequestMapping(path = "/produit/marque", method = RequestMethod.GET)
+	public List<String> getMarqueAll(){
+		return this.gestionProduit.getMarqueAll();
+	}
 
 }
