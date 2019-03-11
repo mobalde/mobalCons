@@ -36,29 +36,26 @@ public class ProduitImpl implements GestionProduit{
 	@Inject
 	private HistoriqueProduitRepository histoRepo;
 	
-	private LibelleProduitEnum libelleProduitEnum;
-	
-	private MarqueProduitEnum marqueProduitEnum;
+//	private LibelleProduitEnum libelleProduitEnum;
+//	
+//	private MarqueProduitEnum marqueProduitEnum;
 
 	@Override
 	public boolean registration(ProduitDto dto) {
 		boolean result = false;
 		if(dto.getType() != null) {
 			ProduitEntity entity = this.produitRepo.findByType(dto.getType());
+			ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
 			if(entity != null) {
-				// update si dto.quantite != entity.quantite
-				if(entity.getQuantiteCommande() != dto.getQuantiteCommande()) {
-					this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(entity)); // save produit in table historique
-					entity.setQuantiteCommande(dto.getQuantiteCommande());
-					this.produitRepo.saveAndFlush(entity);
-					result = true;
-				}
+				entity.setQuantiteCommande(dto.getQuantiteCommande() + entity.getQuantiteCommande());
+				this.produitRepo.saveAndFlush(entity);
+				result = true;
 			} else {
 				// new produit
-				ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
 				this.produitRepo.saveAndFlush(produitEntity);
 				result = true;
 			}
+			this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(produitEntity)); // save produit in table historique
 		}
 		return result;
 	}
@@ -67,8 +64,8 @@ public class ProduitImpl implements GestionProduit{
 	public int getQuantiteCommande(String libelle) {
 		List<ProduitDto> produitDto = this.getProduit(libelle);
 		int quantite = 0;
-		if(produitDto != null || !produitDto.isEmpty()) {
-			quantite = produitDto.stream().mapToInt(x->x.getQuantiteCommande()).sum();
+		if(produitDto != null && !produitDto.isEmpty()) {
+			quantite = produitDto.stream().mapToInt(x -> x.getQuantiteCommande()).sum();
 		}
 		return quantite;
 	}
@@ -118,13 +115,13 @@ public class ProduitImpl implements GestionProduit{
 	@Override
 	public List<String> getLibelleAll() {
 		
-		return this.libelleProduitEnum.getLibelles();
+		return LibelleProduitEnum.getLibelles();
 	}
 
 	@Override
 	public List<String> getMarqueAll() {
 		
-		return this.marqueProduitEnum.getLibelles();
+		return MarqueProduitEnum.getLibelles();
 	}
 
 }

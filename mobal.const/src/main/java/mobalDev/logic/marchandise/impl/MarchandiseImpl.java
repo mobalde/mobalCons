@@ -50,6 +50,11 @@ public class MarchandiseImpl implements GestionMarchandise{
 			vendu.stream().filter(x->x!=null).forEach(x->{
 				x.setComptabiliser(true);
 				this.venduRepo.saveAndFlush(x);
+				// Update quantite_commande in table produit
+				if(produitEntity.isPresent()) {
+					produitEntity.get().setQuantiteCommande(produitEntity.get().getQuantiteCommande() - dto.getTotalSacVendu());
+					this.produitRepo.saveAndFlush(produitEntity.get());
+				}
 			});
 		}
 		return new MarchandiseDto();
