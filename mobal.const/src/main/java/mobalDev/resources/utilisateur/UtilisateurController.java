@@ -28,7 +28,6 @@ import mobalDev.repo.utilisateurRepo.UtilisateurRepository;
  * cette class implemente les web services qui gèrent les utilisateurs
  *
  */
-//@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping(path="/mobalc",
 	consumes = MediaType.APPLICATION_JSON_VALUE, 
