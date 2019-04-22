@@ -1,7 +1,6 @@
 package mobalDev.model.produit;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

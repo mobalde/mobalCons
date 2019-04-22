@@ -14,10 +14,14 @@ import org.springframework.stereotype.Component;
 import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
+import mobalDev.model.banque.BanqueEntity;
+import mobalDev.model.commande.CommandeEntity;
 import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.model.produit.MarqueProduitEnum;
 import mobalDev.model.produit.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
+import mobalDev.repo.banqueRepo.BanqueRepository;
+import mobalDev.repo.commandeRepo.CommandeRepository;
 import mobalDev.repo.produitRepo.ProduitRepository;
 
 /**
@@ -36,28 +40,61 @@ public class ProduitImpl implements GestionProduit{
 	@Inject
 	private HistoriqueProduitRepository histoRepo;
 	
-//	private LibelleProduitEnum libelleProduitEnum;
-//	
-//	private MarqueProduitEnum marqueProduitEnum;
+	@Inject
+	private CommandeRepository commandeRepository;
+	
+	@Inject
+	BanqueRepository banqueRepo;
 
 	@Override
 	public boolean registration(ProduitDto dto) {
 		boolean result = false;
 		if(dto.getType() != null) {
-			ProduitEntity entity = this.produitRepo.findByType(dto.getType());
+			BanqueEntity banqueEntity = new BanqueEntity();
+			CommandeEntity commandeEntity = new CommandeEntity();
+			ProduitEntity entity = this.produitRepo.findType(dto.getType());
 			ProduitEntity produitEntity = this.produitMapper.convertDtoToEntity(dto);
 			if(entity != null) {
+				// ----- Create commande
+				initCommande(dto,commandeEntity);
 				entity.setQuantiteCommande(dto.getQuantiteCommande() + entity.getQuantiteCommande());
-				this.produitRepo.saveAndFlush(entity);
+				this.produitRepo.save(entity); // update 
+				commandeEntity.setProduit(entity);
 				result = true;
 			} else {
+				// ----- init commande
+				initCommande(dto,commandeEntity);
 				// new produit
 				this.produitRepo.saveAndFlush(produitEntity);
+				commandeEntity.setProduit(produitEntity);
 				result = true;
 			}
+			this.initBanque(banqueEntity, dto); // create commande & banque
+			banqueEntity.setCommande(commandeEntity);
+			this.banqueRepo.saveAndFlush(banqueEntity);
 			this.histoRepo.saveAndFlush(this.produitMapper.setHistoEntity(produitEntity)); // save produit in table historique
 		}
 		return result;
+	}
+	
+	private void initCommande(ProduitDto dto, CommandeEntity commandeEntity) {
+		
+		commandeEntity.setDateAchat(dto.getDateAchat());
+		commandeEntity.setMontant(dto.getMontant());
+		commandeEntity.setQuantite(dto.getQuantiteCommande());
+		
+	}
+	
+	private void initBanque(BanqueEntity entity, ProduitDto dto) {
+		
+		entity.setAgence("Kipé");
+		entity.setDateOperation(dto.getDateAchat());
+		entity.setMotif("Achat");
+		entity.setNumeroTicket("N/A");
+		entity.setSoldeAnterieur(0.0);
+		entity.setSomme(0.0);
+		entity.setTotal(dto.getMontant());
+		entity.setVirement(true);
 	}
 
 	@Override
@@ -98,7 +135,7 @@ public class ProduitImpl implements GestionProduit{
 
 	@Override
 	public ProduitDto getProduit(MarqueProduitEnum type) {
-		ProduitEntity entity = this.produitRepo.findByType(type);
+		ProduitEntity entity = this.produitRepo.findType(type);
 		ProduitDto dto = new ProduitDto();
 		if(entity != null) {
 			dto = this.produitMapper.convertEntityToDto(entity);

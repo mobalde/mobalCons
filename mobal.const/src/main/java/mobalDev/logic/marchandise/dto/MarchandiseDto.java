@@ -15,7 +15,6 @@ public class MarchandiseDto{
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private LocalDate dateFin = LocalDate.now().plusDays(7);
 	private int nbSacVendu = 0;
-	private int nbSacAnterieur = 0;
 	private int totalSacVendu = 0;
 	private int totalSacMarchandise;
 	private int totalSacRestant = 0;
@@ -37,12 +36,6 @@ public class MarchandiseDto{
 	}
 	public void setNbSacVendu(int nbSacVendu) {
 		this.nbSacVendu = nbSacVendu;
-	}
-	public int getNbSacAnterieur() {
-		return nbSacAnterieur;
-	}
-	public void setNbSacAnterieur(int nbSacAnterieur) {
-		this.nbSacAnterieur = nbSacAnterieur;
 	}
 	public int getTotalSacVendu() {
 		return totalSacVendu;

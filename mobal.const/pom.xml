@@ -21,7 +21,8 @@
 	   <artifactId>spring-boot-starter-web</artifactId>
 	 </dependency>
 	 
-	 <!-- devtools permet d’automatiser le redémarrage et le rechargement de votre application lorsque les fichiers sources sont recompilés ou modifiés -->
+	 <!-- devtools permet d’automatiser le redémarrage et le rechargement de votre application 
+	 lorsque les fichiers sources sont recompilés ou modifiés -->
 	 <dependency>
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-devtools</artifactId>

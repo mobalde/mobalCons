@@ -1,5 +1,4 @@
 package mobalDev.model.banque;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -12,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import mobalDev.model.AbstractEntity;
+import mobalDev.model.commande.CommandeEntity;
 import mobalDev.model.venduInBanque.VenduInBanqueEntity;
 
 @Entity
@@ -41,8 +41,12 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	private String motif;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
-	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
+	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id", nullable=true)
 	private VenduInBanqueEntity venduInBanque;
+	
+	@OneToOne(fetch=FetchType.LAZY, optional=true, cascade=CascadeType.ALL)
+	@JoinColumn(name="commande_id", referencedColumnName="id", nullable=true)
+	private CommandeEntity commande;
 
 	public LocalDate getDateOperation() {
 		return dateOperation;
@@ -130,5 +134,13 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 
 	public void setMotif(String motif) {
 		this.motif = motif;
+	}
+
+	public CommandeEntity getCommande() {
+		return commande;
+	}
+
+	public void setCommande(CommandeEntity commande) {
+		this.commande = commande;
 	}
 }

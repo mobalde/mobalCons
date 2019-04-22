@@ -41,7 +41,7 @@ public class BanqueDto {
 	public Double getArgent() {
 		return somme;
 	}
-	public void setArgent(Double argentDepose) {
+	public void setSomme(Double argentDepose) {
 		this.somme = argentDepose;
 	}
 	public Double getTotal() {
@@ -67,5 +67,8 @@ public class BanqueDto {
 	}
 	public void setRetrait(boolean retrait) {
 		this.retrait = retrait;
+	}
+	public Double getSomme() {
+		return somme;
 	}
 }

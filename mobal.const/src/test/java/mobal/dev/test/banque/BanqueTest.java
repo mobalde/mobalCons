@@ -39,7 +39,7 @@ public class BanqueTest extends ConfigTest{
 	public void registration_test() {
 		
 		boolean result = false;
-		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.BASKET_BALL);
+		list = this.venduInController.getListeVenteNonComptabilise(LibelleProduitEnum.CIMENT);
 		if(!list.isEmpty() && list != null) {
 			list.get(0).setDepotBanque(true);
 			setBanqueDto(dto, list.get(0));
@@ -54,7 +54,7 @@ public class BanqueTest extends ConfigTest{
 	
 	private void setBanqueDto(BanqueDto dto, VenduInBanqueDto venduInBaDto) {
 		dto.setAgence("Ecobank Kipé");
-		dto.setArgent(14725.0);
+		dto.setSomme(14725.0);
 		dto.setDateOperation(LocalDate.now());
 		dto.setNumeroTicket("1234727A");
 		dto.setSoldeAnterieur(0.0);

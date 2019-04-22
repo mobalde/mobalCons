@@ -48,7 +48,7 @@ public class MarchandiseTest extends ConfigTest{
 	
 	private void initMarchandise(MarchandiseDto dto, ProduitDto pDto) {
 		dto.setTotalSacMarchandise(pDto.getQuantiteCommande());
-		dto.setTotalSacVendu(dto.getNbSacAnterieur()+dto.getNbSacVendu());
+		dto.setTotalSacVendu(dto.getNbSacVendu());
 		dto.setTotalSacRestant(dto.getTotalSacMarchandise()-dto.getTotalSacVendu());
 		dto.setProduitDto(pDto);
 	}

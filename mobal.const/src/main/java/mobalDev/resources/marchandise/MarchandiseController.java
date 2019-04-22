@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +41,7 @@ public class MarchandiseController {
 	}
 	
 	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
-	@RequestMapping(path = "/sacAnterieur", method = RequestMethod.GET)
-	public int getNbSacAnterieur(){
-		return this.gestionMarvhandise.getNbSacAnterieur();
-	}
-	
-	@PreAuthorize(AuthorisationUser.PDG_OR_DG)
-	@RequestMapping(path = "/nombreSacVendu/{idProduit}", method = RequestMethod.GET)
+	@GetMapping(path = "/nombreSacVendu/{idProduit}")
 	public MarchandiseDto nombreDeSacVendu(@PathVariable Long idProduit) {
 		MarchandiseDto dto = new MarchandiseDto();
 		this.gestionMarvhandise.nombreDeSacVendu(dto, idProduit);

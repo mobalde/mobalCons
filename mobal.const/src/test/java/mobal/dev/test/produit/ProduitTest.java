@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,52 +38,24 @@ public class ProduitTest extends ConfigTest{
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
 		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
-		dto.setQuantiteCommande(1000);
-		boolean result_1 = this.produitController.produitAdd(session, dto);
-		
-		// Ajout produit avec type
-		dto = new ProduitDto();
-		dto.setLibelle("basket ball");
-		dto.setLibelleEnum(LibelleProduitEnum.BASKET_BALL);
-		dto.setQuantiteCommande(400);
-		dto.setType(MarqueProduitEnum.AUTRE);
-		boolean result_2 = this.produitController.produitAdd(session, dto);
-		
-		// Ajout produit avec typeProduit
-		dto = new ProduitDto();
-		dto.setLibelle("ciment");
-		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
-		dto.setQuantiteCommande(1000);
+		dto.setQuantiteCommande(1000); // pour la commande
+		dto.setDateAchat(LocalDate.now()); // pour la commande
+		dto.setMontant(13300000.0); // pour la commande
 		dto.setType(MarqueProduitEnum.GI_32_5);
-		boolean result_3 = this.produitController.produitAdd(session, dto);
-		
-		// Ajout produit avec typeProduit
-		dto = new ProduitDto();
-		dto.setLibelle("ciment");
-		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
-		dto.setQuantiteCommande(1000);
-		dto.setType(MarqueProduitEnum.DIAMOND_32_5);
-		boolean result_4 = this.produitController.produitAdd(session, dto);
+		boolean result_1 = this.produitController.produitAdd(session, dto);
 		
 		// Ajout produit sans typeProduit
 		dto = new ProduitDto();
 		dto.setLibelle("ciment");
 		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
 		dto.setQuantiteCommande(700);
+		dto.setDateAchat(LocalDate.now()); // pour la commande
+		dto.setMontant(6900000.0); // pour la commande
 		dto.setType(MarqueProduitEnum.GI_42_5);
 		boolean result_5 = this.produitController.produitAdd(session, dto);
 		
-		// Ajout produit avec typeProduit
-		dto = new ProduitDto();
-		dto.setLibelle("ciment");
-		dto.setLibelleEnum(LibelleProduitEnum.CIMENT);
-		dto.setQuantiteCommande(1000);
-		dto.setType(MarqueProduitEnum.DIAMOND_42_5);
-		boolean result_6 = this.produitController.produitAdd(session, dto);
-		
-		assertFalse(result_1);
-		assertFalse(result_5);
-		
+		assertTrue(result_1);
+		assertTrue(result_5);
 	}
 	
 	@Test
@@ -97,6 +70,7 @@ public class ProduitTest extends ConfigTest{
 		assertNotNull(this.list);
 		assertTrue(this.list.size() <= 6);
 		assertTrue(libelle.equals("ciment"));
+		
 	}
 	
 	@Test
@@ -104,12 +78,12 @@ public class ProduitTest extends ConfigTest{
 		
 		@SuppressWarnings("unused")
 		int quantite = this.produitController.getQuantiteCommande("ciment");
-		List<ProduitDto> dto = this.produitController.getProduit("ciment");
-		ProduitDto Proddto = this.produitController.getProduitWithType(MarqueProduitEnum.GI_32_5);
+		List<ProduitDto> listProdDto = this.produitController.getProduit("ciment");
+		ProduitDto ProdDto = this.produitController.getProduitWithType(MarqueProduitEnum.GI_32_5);
 		
-		assertNotNull(dto);
-		assertNotNull(Proddto);
-		assertTrue(dto.get(0).getQuantiteCommande() > 0);
+		assertNotNull(listProdDto);
+		assertNotNull(ProdDto);
+		assertTrue(listProdDto.get(0).getQuantiteCommande() > 0);
 		
 	}
 }

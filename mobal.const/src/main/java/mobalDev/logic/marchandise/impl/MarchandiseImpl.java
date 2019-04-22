@@ -39,7 +39,6 @@ public class MarchandiseImpl implements GestionMarchandise{
 	@Override
 	public MarchandiseDto registration(MarchandiseDto dto) {
 		
-		dto.setNbSacAnterieur(dto.getNbSacAnterieur() == 0 ? dto.getNbSacVendu() : dto.getTotalSacVendu());
 		MarchandiseEntity marchandiseEntity = this.marchandiseMapper.convertDtoToEntity(dto);
 		marchandiseEntity.setId(null);
 		Optional<ProduitEntity> produitEntity = this.produitRepo.findById(dto.getProduitDto().getId());
@@ -52,7 +51,7 @@ public class MarchandiseImpl implements GestionMarchandise{
 				this.venduRepo.saveAndFlush(x);
 				// Update quantite_commande in table produit
 				if(produitEntity.isPresent()) {
-					produitEntity.get().setQuantiteCommande(produitEntity.get().getQuantiteCommande() - dto.getTotalSacVendu());
+					produitEntity.get().setQuantiteCommande(dto.getTotalSacRestant());
 					this.produitRepo.saveAndFlush(produitEntity.get());
 				}
 			});
@@ -71,17 +70,10 @@ public class MarchandiseImpl implements GestionMarchandise{
 		return dto;
 	}
 	
-	public int getNbSacAnterieur(){
-		
-		MarchandiseDto marchandiseDto = this.getLastMarchandise();
-		return marchandiseDto.getNbSacAnterieur();
-	}
-
 	@Override
 	public void nombreDeSacVendu(MarchandiseDto dto, Long id) {
 		
 		Integer total = this.venduRepo.calculNombreDeSacVendu(id);
 		dto.setNbSacVendu(total != null ? total.intValue() : 0);
-		dto.setNbSacAnterieur(this.getNbSacAnterieur());
 	}
 }
