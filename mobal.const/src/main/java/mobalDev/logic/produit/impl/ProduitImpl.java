@@ -15,6 +15,7 @@ import mobalDev.logic.produit.GestionProduit;
 import mobalDev.logic.produit.dto.ProduitDto;
 import mobalDev.logic.produit.mapper.ProduitMapper;
 import mobalDev.model.banque.BanqueEntity;
+import mobalDev.model.banque.MotifEnum;
 import mobalDev.model.commande.CommandeEntity;
 import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.model.produit.MarqueProduitEnum;
@@ -89,7 +90,7 @@ public class ProduitImpl implements GestionProduit{
 		
 		entity.setAgence("Kipé");
 		entity.setDateOperation(dto.getDateAchat());
-		entity.setMotif("Achat");
+		entity.setMotif(MotifEnum.ACHAT_MARCHANDISE);
 		entity.setNumeroTicket("N/A");
 		entity.setSoldeAnterieur(0.0);
 		entity.setSomme(0.0);

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,30 +24,41 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 	
 	@Column(name="date_operation", nullable=false)
 	private LocalDate dateOperation;
+	
 	@Column(name="agence")
 	private String agence;
+	
 	@Column(name="numero_ticket", nullable=false)
 	private String numeroTicket;
+	
 	@Column(name="somme", nullable=false)
 	private Double somme;
+	
 	@Column(name="solde_anterieur", nullable=false)
 	private Double soldeAnterieur;
+	
 	@Column(name="total", nullable=false)
 	private Double total;
+	
 	@Column(name="is_depot")
 	private boolean isDepot;
+	
 	@Column(name="is_retrait")
 	private boolean isRetrait;
+	
 	@Column(name="is_virement")
 	private boolean isVirement;
-	private String motif;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="motif")
+	private MotifEnum motif;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional=true)
-	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id", nullable=true)
+	@JoinColumn(name="vendu_in_banque_id", referencedColumnName="id")
 	private VenduInBanqueEntity venduInBanque;
 	
-	@OneToOne(fetch=FetchType.LAZY, optional=true, cascade=CascadeType.ALL)
-	@JoinColumn(name="commande_id", referencedColumnName="id", nullable=true)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true)
+	@JoinColumn(name="commande_id", referencedColumnName="id")
 	private CommandeEntity commande;
 
 	public LocalDate getDateOperation() {
@@ -128,11 +141,11 @@ public class BanqueEntity  extends AbstractEntity implements Serializable{
 		this.isVirement = isVirement;
 	}
 
-	public String getMotif() {
+	public MotifEnum getMotif() {
 		return motif;
 	}
 
-	public void setMotif(String motif) {
+	public void setMotif(MotifEnum motif) {
 		this.motif = motif;
 	}
 
