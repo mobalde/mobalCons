@@ -1,0 +1,1 @@
+ALTER TABLE banque ALTER COLUMN motif type varchar(100);

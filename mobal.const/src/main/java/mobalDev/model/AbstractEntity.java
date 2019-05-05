@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+
 @MappedSuperclass // cette classe n'est pas une entité, mais ses champs seront enregistrés en base
 public abstract class AbstractEntity {
 	
@@ -16,8 +18,8 @@ public abstract class AbstractEntity {
 	@Column(columnDefinition = "serial")
 	private Long id;
 	
-	private LocalDateTime create_at;
-	private LocalDateTime update_at;
+	private LocalDateTime create_at = LocalDateTime.now();
+	private LocalDateTime update_at = LocalDateTime.now();
 	
 	private int modificationcounter;
 	

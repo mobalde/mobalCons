@@ -1,0 +1,1 @@
+ALTER TABLE marchandise drop column nb_sac_anterieur;
