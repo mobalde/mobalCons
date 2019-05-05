@@ -2,6 +2,8 @@ package mobalDev.logic.banque.dto;
 
 import java.time.LocalDate;
 
+import mobalDev.model.banque.MotifEnum;
+
 public class BanqueDto {
 
 	private Long id;
@@ -13,6 +15,7 @@ public class BanqueDto {
 	private boolean depot;
 	private boolean retrait;
 	private Double soldeAnterieur;
+	private MotifEnum motif;
 	
 	public LocalDate getDateOperation() {
 		return dateOperation;
@@ -71,4 +74,11 @@ public class BanqueDto {
 	public Double getSomme() {
 		return somme;
 	}
+	public MotifEnum getMotif() {
+		return motif;
+	}
+	public void setMotif(MotifEnum motif) {
+		this.motif = motif;
+	}
+	
 }

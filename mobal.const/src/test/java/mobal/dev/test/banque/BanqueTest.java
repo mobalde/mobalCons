@@ -16,6 +16,7 @@ import org.junit.Test;
 import mobal.dev.test.config.ConfigTest;
 import mobalDev.logic.banque.dto.BanqueDto;
 import mobalDev.logic.venduInBanque.dto.VenduInBanqueDto;
+import mobalDev.model.banque.MotifEnum;
 import mobalDev.model.produit.LibelleProduitEnum;
 import mobalDev.resources.banque.BanqueController;
 import mobalDev.resources.venduInBanque.VenduInBanqueController;
@@ -48,8 +49,6 @@ public class BanqueTest extends ConfigTest{
 		
 		assertNotNull(list);
 		assertTrue(list.size() > 0 || list.size() == 0);
-		
-		assertFalse(result);
 	}
 	
 	private void setBanqueDto(BanqueDto dto, VenduInBanqueDto venduInBaDto) {
@@ -59,6 +58,7 @@ public class BanqueTest extends ConfigTest{
 		dto.setNumeroTicket("1234727A");
 		dto.setSoldeAnterieur(0.0);
 		dto.setTotal(14725.0);
+		dto.setMotif(MotifEnum.VENTE_MARCHANDISE);
 		venduInBaDto.setBanqueDto(dto);
 	}
 	

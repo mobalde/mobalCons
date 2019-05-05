@@ -22,7 +22,6 @@ import mobalDev.model.produit.MarqueProduitEnum;
 import mobalDev.model.produit.ProduitEntity;
 import mobalDev.repo.HistoriqueProduitRepo.HistoriqueProduitRepository;
 import mobalDev.repo.banqueRepo.BanqueRepository;
-import mobalDev.repo.commandeRepo.CommandeRepository;
 import mobalDev.repo.produitRepo.ProduitRepository;
 
 /**
@@ -40,9 +39,6 @@ public class ProduitImpl implements GestionProduit{
 	
 	@Inject
 	private HistoriqueProduitRepository histoRepo;
-	
-	@Inject
-	private CommandeRepository commandeRepository;
 	
 	@Inject
 	BanqueRepository banqueRepo;
