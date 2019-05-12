@@ -10,6 +10,8 @@ public class VenduDto {
 	private Double prixUnitaire;
 	private Double total;
 	private ProduitDto produit;
+	private boolean isDisabledInput = true;
+	private boolean isModif = true;
 	
 	public int getQuantite() {
 		return quantite;
@@ -43,5 +45,17 @@ public class VenduDto {
 	}
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+	public boolean isDisabledInput() {
+		return isDisabledInput;
+	}
+	public void setDisabledInput(boolean isDisabledInput) {
+		this.isDisabledInput = isDisabledInput;
+	}
+	public boolean isModif() {
+		return isModif;
+	}
+	public void setModif(boolean isModif) {
+		this.isModif = isModif;
 	}
 }
