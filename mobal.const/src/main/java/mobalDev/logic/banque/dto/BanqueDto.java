@@ -12,8 +12,9 @@ public class BanqueDto {
 	private String numeroTicket;
 	private Double somme;
 	private Double total;
-	private boolean depot;
-	private boolean retrait;
+	private boolean isDepot;
+	private boolean isRetrait;
+	private boolean isVirement;
 	private Double soldeAnterieur;
 	private MotifEnum motif;
 	
@@ -59,18 +60,6 @@ public class BanqueDto {
 	public void setSoldeAnterieur(Double soldeAnterieur) {
 		this.soldeAnterieur = soldeAnterieur;
 	}
-	public boolean isDepot() {
-		return depot;
-	}
-	public void setDepot(boolean depot) {
-		this.depot = depot;
-	}
-	public boolean isRetrait() {
-		return retrait;
-	}
-	public void setRetrait(boolean retrait) {
-		this.retrait = retrait;
-	}
 	public Double getSomme() {
 		return somme;
 	}
@@ -80,5 +69,22 @@ public class BanqueDto {
 	public void setMotif(MotifEnum motif) {
 		this.motif = motif;
 	}
-	
+	public boolean isDepot() {
+		return isDepot;
+	}
+	public void setDepot(boolean isDepot) {
+		this.isDepot = isDepot;
+	}
+	public boolean isRetrait() {
+		return isRetrait;
+	}
+	public void setRetrait(boolean isRetrait) {
+		this.isRetrait = isRetrait;
+	}
+	public boolean isVirement() {
+		return isVirement;
+	}
+	public void setVirement(boolean isVirement) {
+		this.isVirement = isVirement;
+	}
 }

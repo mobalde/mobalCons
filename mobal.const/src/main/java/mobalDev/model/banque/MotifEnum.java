@@ -6,7 +6,12 @@ import java.util.List;
 public enum MotifEnum {
 
 	ACHAT_MARCHANDISE("Achat marchandise"), //
-	VENTE_MARCHANDISE("Vente marchandise");
+	VENTE_MARCHANDISE("Vente marchandise"), //
+	PAYEMENT_LOYER("Payement loyer"), //
+	FRAIS_TRAVAUX("Frais travaux"), //
+	PAYEMENT_IMPOT("payement impot"), //
+	AUTRE("Autre") //
+	;
 	
 	private String libelle;
 	
